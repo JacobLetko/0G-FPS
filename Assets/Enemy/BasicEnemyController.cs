@@ -6,6 +6,10 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
 
     public float maxHealth = 100.0f;
     public float rotationForce = 10.0f;
+    public float gunCooldown = 0.5f;
+    public float wobbleRange = 2.0f;
+    public float wobbleForce = 5.0f;
+    public float wobbleReachDist = 0.5f;
 
     public Rigidbody body;
     public Transform player;
@@ -13,19 +17,34 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
 
     private float health;
     private bool alive = true;
+    private float gunHeat = 0;
+    private Vector3 startPos;
+    private Vector3 trgPos = Vector3.zero;
 
 
-
-	// Use this for initialization
+    
 	void Start () {
         health = maxHealth;
+        startPos = transform.position;
 	}
 	
-	// Update is called once per frame
 	void Update () {
+        if(gunHeat > 0)
+        {
+            gunHeat -= Time.deltaTime;
+        }
+
 		if(alive)
         {
-
+            RaycastHit hit;
+            if (gunHeat <= 0 && Physics.Raycast(transform.position, transform.forward, out hit))
+            {
+                if (hit.transform.CompareTag("Player"))
+                {
+                    Shoot();
+                    gunHeat = gunCooldown;
+                }
+            }
         }
 	}
 
@@ -33,33 +52,47 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
     {
         if(alive)
         {
+            if (Vector3.Distance(transform.position, trgPos) <= wobbleReachDist)
+            {
+                body.AddForce(-body.velocity * body.mass, ForceMode.Impulse);
+                trgPos = Vector3.zero;
+            }
+
             RaycastHit hit;
             Vector3 targetOffset = player.position - transform.position;
-            float angleToPlayer = Vector3.Angle(targetOffset, transform.forward);
-            if (angleToPlayer >= -90 && angleToPlayer <= 90 &&
-               Physics.Raycast(transform.position, targetOffset, out hit))
+            float  angleToPlayer = Vector3.Angle(targetOffset, transform.forward);
+            //if (angleToPlayer >= -90 && angleToPlayer <= 90 &&
+            //   Physics.Raycast(transform.position, targetOffset, out hit))
+            if (Physics.Raycast(transform.position, targetOffset, out hit))
             {
                 if (hit.transform.tag == "Player")
                 {
-                    float angleDif = Vector3.Angle(transform.position, player.position);
-                    Vector3 cross = Vector3.Cross(transform.forward, targetOffset);
-                    float rampedSpeed = rotationForce * (cross.magnitude / angleDif);
+                    float      angleDif = Vector3.Angle(transform.position, player.position);
+                    Vector3       cross = Vector3.Cross(transform.forward, targetOffset);
+                    float   rampedSpeed = rotationForce * (cross.magnitude / angleDif);
 
-                    float appliedSpeed = Mathf.Min(rampedSpeed, rotationForce);
+                    float    appliedSpeed = Mathf.Min(rampedSpeed, rotationForce);
                     Vector3 desiredTorque = cross * (appliedSpeed / cross.magnitude);
-                    Debug.DrawLine(transform.position, transform.position + (50 * desiredTorque));
-
+                    
                     body.AddTorque(desiredTorque - body.angularVelocity);
+
+                    if (trgPos == Vector3.zero)
+                    {
+
+                        trgPos = new Vector3(startPos.x + Random.Range(-wobbleRange, wobbleRange),
+                                             startPos.y + Random.Range(-wobbleRange, wobbleRange),
+                                             startPos.z + Random.Range(-wobbleRange, wobbleRange));
+
+                        Vector3 trgDir = trgPos - transform.position;
+                        body.AddForce(trgDir.normalized * wobbleForce);
+                    }
+                }
+                else
+                {
+                    body.AddTorque(-body.angularVelocity);
                 }
             }
             
-            if(Physics.Raycast(transform.position, transform.forward, out hit))
-            {
-                if(hit.transform.CompareTag("Player"))
-                {
-                    Shoot();
-                }
-            }
         }
     }
 

@@ -66,12 +66,11 @@ public class GunManager : MonoBehaviour
                 {
                     GameObject bul = bulletPool.GetComponent<BulletPool>().GetBullet();
                     SwitchBullet(bul);
-                    //if (bul.activeSelf == false)
-                    //{
-                        bul.transform.position = transform.position;
-                        bul.transform.rotation = transform.rotation;
-                        bul.SetActive(true);
-                    //}
+
+                    bul.transform.position = transform.position;
+                    bul.transform.rotation = transform.rotation;
+                    bul.SetActive(true);
+
                     timer = 0;
                 }
 
@@ -82,13 +81,12 @@ public class GunManager : MonoBehaviour
     public void SwitchBullet(GameObject bulletObj)
     {
 
-        //if (bulletObj.activeSelf == false)
-        //{
-            bulletObj.GetComponent<MeshRenderer>().materials[0] = bullet[weaponIndex].material;
-            bulletObj.GetComponent<Bullet>().damage = bullet[weaponIndex].damage;
-            bulletObj.GetComponent<Bullet>().speed = bullet[weaponIndex].speed;
-            bulletObj.GetComponent<Bullet>().lifetime = bullet[weaponIndex].lifetime;
-        //}
+
+        bulletObj.GetComponent<MeshRenderer>().materials[0] = bullet[weaponIndex].material;
+        bulletObj.GetComponent<Bullet>().damage = bullet[weaponIndex].damage;
+        bulletObj.GetComponent<Bullet>().speed = bullet[weaponIndex].speed;
+        bulletObj.GetComponent<Bullet>().lifetime = bullet[weaponIndex].lifetime;
+
 
     }
 

@@ -264,6 +264,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1398080268261096, guid: 0b8e3806ccbd6da41b9c01712f63c0d9, type: 2}
+      propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 114409172617818008, guid: 0b8e3806ccbd6da41b9c01712f63c0d9,
         type: 2}
       propertyPath: bulletPool

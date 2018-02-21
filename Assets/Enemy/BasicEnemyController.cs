@@ -11,9 +11,18 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
     public float wobbleForce = 5.0f;
     public float wobbleReachDist = 0.5f;
 
+    public float bulletSpeed = 50.0f;
+    public float bulletDamage = 10.0f;
+    public Vector2 shootPitchRange = new Vector2(0.9f, 1.1f);
+
+    public AudioClip shootSound;
+    public AudioClip explodeSound;
+
     public Rigidbody body;
     public Transform player;
+    public AudioSource audioSource;
     public GameObject bulletPrefab;
+    public ParticleSystem explodeEffect;
 
     private float health;
     private bool alive = true;
@@ -112,19 +121,22 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
 
     private void Kill()
     {
-        gameObject.SetActive(false);
-
-        //needs an explosion effect or something to let you know it's dead
-        //after that's added, switch from SetActive to alive = false
-
-        //alive = false;
+        explodeEffect.Play();
+        audioSource.pitch = 1.0f;
+        audioSource.PlayOneShot(explodeSound);
+        alive = false;
     }
 
     private void Shoot()
     {
+        audioSource.pitch = Random.Range(shootPitchRange.x, shootPitchRange.y);
+        audioSource.PlayOneShot(shootSound);
         GameObject b = Instantiate(bulletPrefab);
         b.transform.position = transform.position + transform.forward * 2f;
         b.transform.rotation = transform.rotation;
+        Bullet s = b.GetComponent<Bullet>();
+        s.speed = bulletSpeed;
+        s.damage = bulletDamage;
     }
 
 }

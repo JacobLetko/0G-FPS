@@ -8,36 +8,53 @@ public class PlayerCam : MonoBehaviour
 
     [Header("Player Controls")]
     public float acceleration;
-    [Range(0,1)]
+    [Range(0, 1)]
     public float throttle;//adjustable speed limmit. values ranges from 0 to 1.
     public float HardSpeedLimmit = 30;//in meters per second
     public float metersPerSec;//measuring stick
 
-    float vert;// = Input.GetAxis("Vertical");
-    float horz;// = Input.GetAxis("Horizontal");
-    float depth;
 
+    public float vert;// = Input.GetAxis("Vertical");
+    public float horz;// = Input.GetAxis("Horizontal");
+    public float depth;
+    public float tilt;
+
+    [Range(0, 100)]
     public float mouseSensX = 3.5f;//Sensativity x
+    [Range(0, 100)]
     public float mouseSensY = 3.5f;//sensativity Y
-
+    [Range(0, 100)]
+    public float tiltSensitivity = 60;
     Transform camT;
     Rigidbody myRig;
-    float vertLookRotation;
+
 
     // Use this for initialization
     void Start()
     {
         camT = Camera.main.transform;
         myRig = GetComponent<Rigidbody>();
+        Cursor.lockState = CursorLockMode.Locked;
     }
+
+
 
     // Update is called once per frame
     void Update()
     {
+
+
+
+
         vert = 0;
         horz = 0;
         depth = 0;
+        tilt = 0;
 
+        vert = Input.GetAxis("Vertical");
+        horz = Input.GetAxis("Horizontal");
+        depth = Input.GetAxis("Jump");
+        tilt = Input.GetAxis("ZAxisRotate");
 
         metersPerSec = myRig.velocity.magnitude;
 
@@ -47,51 +64,55 @@ public class PlayerCam : MonoBehaviour
         myRig.AddRelativeTorque(Vector3.left * Input.GetAxis("Mouse Y") * mouseSensY);
 
 
-        vert = Input.GetAxis("Vertical");
-        horz = Input.GetAxis("Vertical");
-        depth = Input.GetAxis("Jump");
 
 
 
 
 
+
+
+    }
+
+
+    void FixedUpdate()
+    {
         //Movement controls
-        if (vert >= 0.1f)//(Input.GetKey(KeyCode.W))
+        if (vert >= 0)//(Input.GetKey(KeyCode.W))
         {
             if (metersPerSec < HardSpeedLimmit)
             {
                 myRig.AddRelativeForce(new Vector3(0, 0, acceleration * throttle) * Time.deltaTime);
             }
         }
-        if (vert <= -0.1f)//(Input.GetKey(KeyCode.S))
+        if (vert <= 0)//(Input.GetKey(KeyCode.S))
         {
             if (metersPerSec < HardSpeedLimmit)
             {
                 myRig.AddRelativeForce(new Vector3(0, 0, -acceleration * throttle) * Time.deltaTime);
             }
         }
-        if (horz >= 0.1f)//(Input.GetKey(KeyCode.D))
+        if (horz >= 0)//(Input.GetKey(KeyCode.D))
         {
             if (metersPerSec < HardSpeedLimmit)
             {
                 myRig.AddRelativeForce(new Vector3(acceleration * throttle, 0, 0) * Time.deltaTime);
             }
         }
-        if (horz <= -0.1f)//(Input.GetKey(KeyCode.A))
+        if (horz <= 0)//(Input.GetKey(KeyCode.A))
         {
             if (metersPerSec < HardSpeedLimmit)
             {
                 myRig.AddRelativeForce(new Vector3(-acceleration * throttle, 0, 0) * Time.deltaTime);
             }
         }
-        if (depth >= 0.1f)//(Input.GetKey(KeyCode.Space))
+        if (depth >= 0)//(Input.GetKey(KeyCode.Space))
         {
             if (metersPerSec < HardSpeedLimmit)
             {
                 myRig.AddRelativeForce(new Vector3(0, acceleration * throttle, 0) * Time.deltaTime);
             }
         }
-        if (depth <= 0.1f)//(Input.GetKey(KeyCode.C))
+        if (depth <= 0)//(Input.GetKey(KeyCode.C))
         {
             if (metersPerSec < HardSpeedLimmit)
             {
@@ -107,13 +128,13 @@ public class PlayerCam : MonoBehaviour
 
 
         //cam tilt controls
-        if (Input.GetKey(KeyCode.E))
+        if (tilt >= 0)//(Input.GetKey(KeyCode.E))
         {
-            myRig.AddRelativeTorque(Vector3.forward * ((-acceleration / 3) * Time.deltaTime));
+            myRig.AddRelativeTorque(Vector3.forward * -tiltSensitivity);//(Vector3.forward * ((-acceleration / 3) * Time.deltaTime));
         }
-        if (Input.GetKey(KeyCode.Q))
+        if (tilt <= 0)//(Input.GetKey(KeyCode.Q))
         {
-            myRig.AddRelativeTorque(Vector3.forward * ((acceleration / 3) * Time.deltaTime));
+            myRig.AddRelativeTorque(Vector3.forward * tiltSensitivity);//(Vector3.forward * ((acceleration / 3) * Time.deltaTime));
         }
     }
 }

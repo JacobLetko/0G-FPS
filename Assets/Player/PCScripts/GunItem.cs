@@ -13,12 +13,14 @@ public class GunItem
 
     public float damage;
 
+    public float lifetime;
+
     public float speed;
 
     //public bool homing;
 
-    public float splashRadius;
+    //public float splashRadius;
 
-    public bool unlocked;//determines if the weapons should be availible to the player to use.
+    //public bool unlocked;//determines if the weapons should be availible to the player to use. Not to be mistaken for if the object is active or not.
 
 }

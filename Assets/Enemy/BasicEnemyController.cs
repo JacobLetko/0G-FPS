@@ -9,6 +9,7 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
 
     public Rigidbody body;
     public Transform player;
+    public GameObject bulletPrefab;
 
     private float health;
     private bool alive = true;
@@ -32,18 +33,33 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
     {
         if(alive)
         {
-            //TAKEN FROM http://wiki.unity3d.com/index.php?title=TorqueLookRotation
-            Vector3 targetDelta = player.position - transform.position;
+            RaycastHit hit;
+            Vector3 targetOffset = player.position - transform.position;
+            float angleToPlayer = Vector3.Angle(targetOffset, transform.forward);
+            if (angleToPlayer >= -90 && angleToPlayer <= 90 &&
+               Physics.Raycast(transform.position, targetOffset, out hit))
+            {
+                if (hit.transform.tag == "Player")
+                {
+                    float angleDif = Vector3.Angle(transform.position, player.position);
+                    Vector3 cross = Vector3.Cross(transform.forward, targetOffset);
+                    float rampedSpeed = rotationForce * (cross.magnitude / angleDif);
 
-            //get the angle between transform.forward and target delta
-            float angleDiff = Vector3.Angle(transform.forward, targetDelta);
+                    float appliedSpeed = Mathf.Min(rampedSpeed, rotationForce);
+                    Vector3 desiredTorque = cross * (appliedSpeed / cross.magnitude);
+                    Debug.DrawLine(transform.position, transform.position + (50 * desiredTorque));
 
-            // get its cross product, which is the axis of rotation to
-            // get from one vector to the other
-            Vector3 cross = Vector3.Cross(transform.forward, targetDelta);
-
-            // apply torque along that axis according to the magnitude of the angle.
-            body.AddTorque(cross * angleDiff * rotationForce);
+                    body.AddTorque(desiredTorque - body.angularVelocity);
+                }
+            }
+            
+            if(Physics.Raycast(transform.position, transform.forward, out hit))
+            {
+                if(hit.transform.CompareTag("Player"))
+                {
+                    Shoot();
+                }
+            }
         }
     }
 
@@ -71,6 +87,11 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
         //alive = false;
     }
 
-
+    private void Shoot()
+    {
+        GameObject b = Instantiate(bulletPrefab);
+        b.transform.position = transform.position + transform.forward * 2f;
+        b.transform.rotation = transform.rotation;
+    }
 
 }

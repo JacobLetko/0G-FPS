@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour {
 
 
 
-    private void Start()
+    private void OnEnable()
     {
         Invoke("DeactivateInvoke", lifetime);
     }

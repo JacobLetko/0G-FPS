@@ -6,7 +6,9 @@ using UnityEngine;
 public class GunItem
 {
     //source bullet settings
-   
+
+    public Material material;
+
     public string name;
 
     public float damage;

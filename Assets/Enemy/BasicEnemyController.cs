@@ -21,6 +21,7 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
     public Rigidbody body;
     public Transform player;
     public AudioSource audioSource;
+    public BulletPool bulletPool;
     public GameObject bulletPrefab;
     public ParticleSystem explodeEffect;
 
@@ -131,7 +132,17 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
     {
         audioSource.pitch = Random.Range(shootPitchRange.x, shootPitchRange.y);
         audioSource.PlayOneShot(shootSound);
-        GameObject b = Instantiate(bulletPrefab);
+        GameObject b;
+        if(bulletPool)
+        {
+            b = bulletPool.GetBullet();
+            b.SetActive(true);
+        }
+        else
+        {
+            b = Instantiate(bulletPrefab);
+            Debug.LogError("No bullet pool assigned!");
+        }
         b.transform.position = transform.position + transform.forward * 2f;
         b.transform.rotation = transform.rotation;
         Bullet s = b.GetComponent<Bullet>();

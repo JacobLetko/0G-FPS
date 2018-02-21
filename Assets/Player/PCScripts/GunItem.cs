@@ -17,6 +17,7 @@ public class GunItem
 
     public float speed;
 
+    public float fireRate = 0.25f;
     //public bool homing;
 
     //public float splashRadius;

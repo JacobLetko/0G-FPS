@@ -20,13 +20,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4019734303653654}
   - component: {fileID: 33509268780640830}
-  - component: {fileID: 65666773188872578}
   - component: {fileID: 23426049409085940}
   - component: {fileID: 54447145273524582}
   - component: {fileID: 114583454217069482}
   - component: {fileID: 114409172617818008}
   - component: {fileID: 82368770990451522}
   - component: {fileID: 114908981392590514}
+  - component: {fileID: 135216974650670924}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Player
@@ -154,7 +154,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1398080268261096}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!54 &54447145273524582
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -170,18 +170,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &65666773188872578
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1398080268261096}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!81 &81280803875542610
 AudioListener:
   m_ObjectHideFlags: 1
@@ -349,3 +337,15 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1570574273966518}
   m_Enabled: 1
+--- !u!135 &135216974650670924
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1398080268261096}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}

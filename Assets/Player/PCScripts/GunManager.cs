@@ -84,7 +84,7 @@ public class GunManager : MonoBehaviour
             }
             else
             {
-                weaponIndex--;
+                weaponIndex = 0;
             }
 
         }
@@ -96,7 +96,7 @@ public class GunManager : MonoBehaviour
             }
             else
             {
-                weaponIndex++;
+                weaponIndex = bullet.Length - 1;
             }
         }
         

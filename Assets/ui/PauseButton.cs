@@ -18,7 +18,7 @@ public class PauseButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("escape") && ispause == false)
+        if (Input.GetKeyDown("tab") && ispause == false)
         {
             cursor();
             Time.timeScale = 0.0f;
@@ -26,7 +26,7 @@ public class PauseButton : MonoBehaviour
             ispause = true;
         }
 
-        else if (Input.GetKeyDown("escape") && ispause == true)
+        else if (Input.GetKeyDown("tab") && ispause == true)
         {
             cursor();
             Time.timeScale = 1.0f;
@@ -52,6 +52,7 @@ public class PauseButton : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+           
         }
     }
 }

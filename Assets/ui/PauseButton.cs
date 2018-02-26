@@ -20,18 +20,18 @@ public class PauseButton : MonoBehaviour
     {
         if (Input.GetKeyDown("tab") && ispause == false)
         {
+            ispause = true;
             cursor();
             Time.timeScale = 0.0f;
             pause.gameObject.SetActive(true);
-            ispause = true;
         }
 
         else if (Input.GetKeyDown("tab") && ispause == true)
         {
+            ispause = false;
             cursor();
             Time.timeScale = 1.0f;
             pause.gameObject.SetActive(false);
-            ispause = false;
         }
     }
 
@@ -43,12 +43,12 @@ public class PauseButton : MonoBehaviour
 
     public void cursor()
     {
-        if(ispause == false)
+        if(ispause == true)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
-        else if (ispause == true)
+        else if (ispause == false)
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;

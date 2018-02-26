@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Audio;
-using System;
 using UnityEngine;
 
 public class GunManager : MonoBehaviour
@@ -14,7 +13,7 @@ public class GunManager : MonoBehaviour
     
     public AudioSource playerSourceAudio;
 
-
+    public float randomPitchRangeModifier = 0.2f;
 
     //[HideInInspector]
     //[Range(0, 1)]
@@ -31,7 +30,7 @@ public class GunManager : MonoBehaviour
 
     
 
-    int selectedWeapon;//detects weapon swap
+    //int selectedWeapon;//detects weapon swap
 
 
     float timer;
@@ -63,7 +62,7 @@ public class GunManager : MonoBehaviour
             }
         }
 
-        selectedWeapon = weaponIndex;
+        //selectedWeapon = weaponIndex;
         timer = bullet[weaponIndex].fireRate;
         currentAmmo = bullet[weaponIndex].ammo;
         //set default bullet settings here
@@ -79,9 +78,13 @@ public class GunManager : MonoBehaviour
 
         if (Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
-            if (weaponIndex < bullet.Length -1)
+            if (weaponIndex < bullet.Length - 1)
             {
                 weaponIndex++;
+            }
+            else
+            {
+                weaponIndex--;
             }
 
         }
@@ -91,9 +94,13 @@ public class GunManager : MonoBehaviour
             {
                 weaponIndex--;
             }
+            else
+            {
+                weaponIndex++;
+            }
         }
-
-
+        
+       
 
 
         if (Input.GetAxis("Fire1") > 0)
@@ -107,10 +114,11 @@ public class GunManager : MonoBehaviour
 
         //weapon select here
         //overwrite bullet current settings here
-        if (selectedWeapon != weaponIndex)
-        {
-            selectedWeapon = weaponIndex;
-        }
+        //if (selectedWeapon != weaponIndex)
+        //{
+        //    selectedWeapon = weaponIndex;
+
+        //}
 
 
         //Projectile cloning here
@@ -120,7 +128,7 @@ public class GunManager : MonoBehaviour
 
             if (bulletPool != null)
             {
-                if (currentAmmo > 0)
+                if (bullet[weaponIndex].ammo > 0)
                 {
                     if (timer >= bullet[weaponIndex].fireRate)
                     {
@@ -130,20 +138,26 @@ public class GunManager : MonoBehaviour
 
                         bul.transform.position = transform.position;
                         bul.transform.rotation = transform.rotation;
+                        bul.transform.Rotate(new Vector3(Random.Range(bullet[weaponIndex].accuracyModifier, -bullet[weaponIndex].accuracyModifier),
+                                                         Random.Range(bullet[weaponIndex].accuracyModifier, -bullet[weaponIndex].accuracyModifier),
+                                                         Random.Range(bullet[weaponIndex].accuracyModifier, -bullet[weaponIndex].accuracyModifier)));
                         bul.SetActive(true);
+
+
 
                         playerSourceAudio.Play();
 
                         if (!infiniteAmmo)
                         {
-                            currentAmmo--;
+                            bullet[weaponIndex].ammo -= 1;
                         }
-
+                        
                         timer = 0;
                     }
                 }
             }
         }
+        currentAmmo = bullet[weaponIndex].ammo;
     }
 
     void SwitchBullet(GameObject bulletObj)
@@ -154,7 +168,7 @@ public class GunManager : MonoBehaviour
         bulletObj.GetComponent<Bullet>().damage = bullet[weaponIndex].damage;
         bulletObj.GetComponent<Bullet>().speed = bullet[weaponIndex].speed;
         bulletObj.GetComponent<Bullet>().lifetime = bullet[weaponIndex].lifetime;
-        currentAmmo = bullet[weaponIndex].ammo;
+
         infiniteAmmo = bullet[weaponIndex].infinite;
 
     }
@@ -164,7 +178,7 @@ public class GunManager : MonoBehaviour
 
         playerSourceAudio.clip = bullet[weaponIndex].clip;
         playerSourceAudio.volume = bullet[weaponIndex].volume;
-        playerSourceAudio.pitch = bullet[weaponIndex].pitch;
+        playerSourceAudio.pitch = bullet[weaponIndex].pitch + Random.Range(randomPitchRangeModifier,-randomPitchRangeModifier);
         playerSourceAudio.loop = bullet[weaponIndex].loop;
 
     }

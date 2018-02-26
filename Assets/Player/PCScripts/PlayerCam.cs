@@ -29,7 +29,9 @@ public class PlayerCam : MonoBehaviour
     public float negTilt;
     public bool breaking;
     public float breakDrag = 7;
+    public float angularBreakDrag = 7;
     float normalDrag;
+    float normalAngularDrag;
 
     Transform camT;
     Rigidbody myRig;
@@ -42,6 +44,7 @@ public class PlayerCam : MonoBehaviour
         myRig = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         normalDrag = myRig.drag;
+        normalAngularDrag = myRig.angularDrag;
     }
 
 
@@ -65,7 +68,7 @@ public class PlayerCam : MonoBehaviour
         posTilt = Input.GetAxis("PosZAxisRotate");
         negTilt = -Input.GetAxis("NegZAxisRotate");
 
-        if (posTilt >= 1 && negTilt <= -1)
+        if (posTilt >= 0.3 && negTilt <= -0.3)
         {
             breaking = true;
 
@@ -103,10 +106,13 @@ public class PlayerCam : MonoBehaviour
         if (breaking)
         {
             myRig.drag = breakDrag;
+            myRig.angularDrag = angularBreakDrag;
+            
         }
         else
         {
             myRig.drag = normalDrag;
+            myRig.angularDrag = normalAngularDrag;
         }
         //Movement controls
         if (vert >= 0)//(Input.GetKey(KeyCode.W))

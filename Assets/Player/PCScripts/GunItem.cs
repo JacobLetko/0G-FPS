@@ -14,6 +14,9 @@ public class GunItem
 
     public string name;
 
+    [Range(0,100)]
+    public float accuracyModifier = 1;
+
     public float damage;
 
     public float lifetime;

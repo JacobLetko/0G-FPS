@@ -4,9 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class LoadSceneOnClick : MonoBehaviour {
 
-    public void LoadByIndex(int sceneIndex)
+    public void LoadByName(string sceneName)
     {
         Debug.Log("has moved on");
-        SceneManager.LoadScene(sceneIndex);
+        SceneManager.LoadScene(sceneName);
     }
 }

@@ -21,8 +21,12 @@ public class HighScore : MonoBehaviour {
     {
         resetScore();
         getList();
-        
 	}
+
+    void Update()
+    {
+        
+    }
 
     public void resetScore()
     {
@@ -33,7 +37,8 @@ public class HighScore : MonoBehaviour {
     {
         for (int i = 0; i < 10; i++)
         {
-            //names.Add(PlayerPrefs.GetInt("scores " + i.ToString()));
+            scores.Add(PlayerPrefs.GetInt("scores" + i));
+            names.Add(PlayerPrefs.GetString("names" + i));
         }
     }
 }

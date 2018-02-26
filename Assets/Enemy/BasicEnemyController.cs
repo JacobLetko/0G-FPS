@@ -43,7 +43,7 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
         {
             gunHeat -= Time.deltaTime;
         }
-
+        
 		if(alive)
         {
             RaycastHit hit;
@@ -60,7 +60,7 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
 
     void FixedUpdate()
     {
-        if(alive)
+        if (alive)
         {
             if (Vector3.Distance(transform.position, trgPos) <= wobbleReachDist)
             {

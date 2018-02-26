@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 82924018669715166}
   m_Layer: 0
   m_Name: BasicEnemy
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -213,7 +213,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7ccf8b9ea2f4a9b45803d8bae00ecf59, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -245,7 +245,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7ccf8b9ea2f4a9b45803d8bae00ecf59, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -410,6 +410,7 @@ MonoBehaviour:
   body: {fileID: 54113061300875214}
   player: {fileID: 0}
   audioSource: {fileID: 82924018669715166}
+  bulletPool: {fileID: 0}
   bulletPrefab: {fileID: 1151126990084618, guid: 83710c0df0f5db24d87e7663d1f9b953,
     type: 2}
   explodeEffect: {fileID: 198587220091207624}

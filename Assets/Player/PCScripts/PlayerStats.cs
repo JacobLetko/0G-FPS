@@ -20,6 +20,11 @@ public class PlayerStats : MonoBehaviour, IDamagable
 
     }
 
+    public float GetHealth()
+    {
+        return hitPoints;
+    }
+
 
 
 }

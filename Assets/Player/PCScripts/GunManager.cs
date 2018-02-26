@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Audio;
+using System;
 using UnityEngine;
 
 public class GunManager : MonoBehaviour
@@ -9,6 +11,18 @@ public class GunManager : MonoBehaviour
     public GunItem[] bullet;
 
     public GameObject bulletPool;
+    
+    public AudioSource playerSourceAudio;
+
+
+
+    //[HideInInspector]
+    //[Range(0, 1)]
+    //public float myVolume = 1;
+    //[Range(0, 3)]
+    //public float myPitch = 1;
+
+    //public bool isAudioloop;
 
 
     public int weaponIndex = 0;//keeps track of selected weapon via index.
@@ -21,14 +35,39 @@ public class GunManager : MonoBehaviour
 
 
     float timer;
+    //[HideInInspector]
+    public int currentAmmo;
+    [HideInInspector]
+    public bool infiniteAmmo = false;
+
+
+    //void Awake()
+    //{
+    //    playerSourceAudio = gameObject.AddComponent<AudioSource>();
+    //}
 
     // Use this for initialization
     void Start()
     {
+        playerSourceAudio = GetComponent<AudioSource>();
+
+        if (bulletPool == null)
+        {
+            if (GameObject.Find("BulletPoolObj") != null)
+            {
+                bulletPool = GameObject.Find("BulletPoolObj");
+            }
+            else
+            {
+                Debug.LogError("Error: Cannot Find Bullet Pool Object");
+            }
+        }
+
         selectedWeapon = weaponIndex;
         timer = bullet[weaponIndex].fireRate;
+        currentAmmo = bullet[weaponIndex].ammo;
         //set default bullet settings here
-        
+
 
     }
 
@@ -62,33 +101,56 @@ public class GunManager : MonoBehaviour
 
             if (bulletPool != null)
             {
-                if (timer >= bullet[weaponIndex].fireRate)
+                if (currentAmmo > 0)
                 {
-                    GameObject bul = bulletPool.GetComponent<BulletPool>().GetBullet();
-                    SwitchBullet(bul);
+                    if (timer >= bullet[weaponIndex].fireRate)
+                    {
+                        GameObject bul = bulletPool.GetComponent<BulletPool>().GetBullet();
+                        SwitchBullet(bul);
+                        SwitchSound();
 
-                    bul.transform.position = transform.position;
-                    bul.transform.rotation = transform.rotation;
-                    bul.SetActive(true);
+                        bul.transform.position = transform.position;
+                        bul.transform.rotation = transform.rotation;
+                        bul.SetActive(true);
 
-                    timer = 0;
+                        playerSourceAudio.Play();
+
+                        if (!infiniteAmmo)
+                        {
+                            currentAmmo--;
+                        }
+
+                        timer = 0;
+                    }
                 }
-
             }
         }
     }
 
-    public void SwitchBullet(GameObject bulletObj)
+    void SwitchBullet(GameObject bulletObj)
     {
 
 
-        bulletObj.GetComponent<MeshRenderer>().materials[0] = bullet[weaponIndex].material;
+        bulletObj.GetComponent<MeshRenderer>().material = bullet[weaponIndex].material;
         bulletObj.GetComponent<Bullet>().damage = bullet[weaponIndex].damage;
         bulletObj.GetComponent<Bullet>().speed = bullet[weaponIndex].speed;
         bulletObj.GetComponent<Bullet>().lifetime = bullet[weaponIndex].lifetime;
-
+        currentAmmo = bullet[weaponIndex].ammo;
+        infiniteAmmo = bullet[weaponIndex].infinite;
 
     }
+
+    void SwitchSound()
+    {
+
+        playerSourceAudio.clip = bullet[weaponIndex].clip;
+        playerSourceAudio.volume = bullet[weaponIndex].volume;
+        playerSourceAudio.pitch = bullet[weaponIndex].pitch;
+        playerSourceAudio.loop = bullet[weaponIndex].loop;
+
+    }
+
+
 
 
 }

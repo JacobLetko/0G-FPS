@@ -397,7 +397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  rotationForce: 50
+  rotationForce: 2
   gunCooldown: 0.5
   wobbleRange: 2
   wobbleForce: 50

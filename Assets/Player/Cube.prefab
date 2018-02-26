@@ -281,16 +281,28 @@ MonoBehaviour:
     damage: 10
     lifetime: 1
     speed: 50
-    fireRate: 0.01
+    fireRate: 0.1
     ammo: 100
     infinite: 0
     clip: {fileID: 8300000, guid: c74d673ec97b683429f6a4d0714f0fe2, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+  - material: {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
+    name: Particle Cannon
+    damage: 10
+    lifetime: 1
+    speed: 50
+    fireRate: 0.3
+    ammo: 100
+    infinite: 0
+    clip: {fileID: 8300000, guid: 548113de6462a924e804330926221ad8, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
   bulletPool: {fileID: 0}
   playerSourceAudio: {fileID: 82368770990451522}
-  weaponIndex: 0
+  weaponIndex: 1
   fire: 0
   currentAmmo: 0
   infiniteAmmo: 0
@@ -307,15 +319,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acceleration: 15
   HardSpeedLimmit: 60
-  mouseSensX: 30
-  mouseSensY: 30
-  tiltSensitivity: 30
+  mouseSensX: 0.1
+  mouseSensY: 0.1
+  tiltSensitivity: 4
   throttle: 1
   metersPerSec: 0
   vert: 0
   horz: 0
   depth: 0
-  tilt: 0
+  posTilt: 0
+  negTilt: 0
   breaking: 0
   breakDrag: 7
 --- !u!114 &114908981392590514

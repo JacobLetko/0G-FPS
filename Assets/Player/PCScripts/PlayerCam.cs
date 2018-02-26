@@ -25,7 +25,8 @@ public class PlayerCam : MonoBehaviour
     public float vert;// = Input.GetAxis("Vertical");
     public float horz;// = Input.GetAxis("Horizontal");
     public float depth;
-    public float tilt;    
+    public float posTilt;
+    public float negTilt;
     public bool breaking;
     public float breakDrag = 7;
     float normalDrag;
@@ -55,22 +56,25 @@ public class PlayerCam : MonoBehaviour
         vert = 0;
         horz = 0;
         depth = 0;
-        tilt = 0;
+        posTilt = 0;
+        negTilt = 0;
 
         vert = Input.GetAxis("Vertical");
         horz = Input.GetAxis("Horizontal");
         depth = Input.GetAxis("Jump");
-        tilt = Input.GetAxis("ZAxisRotate");
+        posTilt = Input.GetAxis("PosZAxisRotate");
+        negTilt = -Input.GetAxis("NegZAxisRotate");
 
-        if (Input.GetKey("q") && Input.GetKey("e"))
+        if (posTilt >= 1 && negTilt <= -1)
         {
             breaking = true;
-            tilt = 0;
+
         }
         else
         {
+
             breaking = false;
-        }
+        } 
 
         
 
@@ -93,7 +97,17 @@ public class PlayerCam : MonoBehaviour
 
 
     void FixedUpdate()
-    {
+    {     
+        
+        //breaking
+        if (breaking)
+        {
+            myRig.drag = breakDrag;
+        }
+        else
+        {
+            myRig.drag = normalDrag;
+        }
         //Movement controls
         if (vert >= 0)//(Input.GetKey(KeyCode.W))
         {
@@ -146,27 +160,17 @@ public class PlayerCam : MonoBehaviour
 
 
         //cam tilt controls
-        if (tilt >= 0)//(Input.GetKey(KeyCode.E))
-        {
-            myRig.AddRelativeTorque(Vector3.forward * -tiltSensitivity);//(Vector3.forward * ((-acceleration / 3) * Time.deltaTime));
-        }
-        if (tilt <= 0)//(Input.GetKey(KeyCode.Q))
-        {
-            myRig.AddRelativeTorque(Vector3.forward * tiltSensitivity);//(Vector3.forward * ((acceleration / 3) * Time.deltaTime));
-        }
+        //if (tilt >= 0)//(Input.GetKey(KeyCode.E))
+        //{
+            myRig.AddRelativeTorque(Vector3.forward * Input.GetAxis("PosZAxisRotate") * -tiltSensitivity);//(Vector3.forward * ((-acceleration / 3) * Time.deltaTime));
+            myRig.AddRelativeTorque(Vector3.forward * -Input.GetAxis("NegZAxisRotate") * -tiltSensitivity);//(Vector3.forward * ((-acceleration / 3) * Time.deltaTime));
+        //}
 
 
 
 
-        //breaking
-        if (breaking)
-        {
-            myRig.drag = breakDrag;
-        }
-        else
-        {
-            myRig.drag = normalDrag;
-        }
+
+
 
 
     }

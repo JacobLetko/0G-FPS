@@ -76,7 +76,26 @@ public class GunManager : MonoBehaviour
     {
         timer += Time.deltaTime;
         //Input controls here
-        weaponIndex = (int)Input.GetAxis("Mouse ScrollWheel");
+
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+        {
+            if (weaponIndex < bullet.Length -1)
+            {
+                weaponIndex++;
+            }
+
+        }
+        else if(Input.GetAxis("Mouse ScrollWheel") < 0f)
+        {
+            if (weaponIndex > 0)
+            {
+                weaponIndex--;
+            }
+        }
+
+
+
+
         if (Input.GetAxis("Fire1") > 0)
         {
             fire = true;

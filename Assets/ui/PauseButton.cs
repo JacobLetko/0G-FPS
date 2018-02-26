@@ -18,11 +18,20 @@ public class PauseButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("escape") && ispause == false)
+        if (Input.GetKeyDown("tab") && ispause == false)
         {
+            cursor();
             Time.timeScale = 0.0f;
             pause.gameObject.SetActive(true);
             ispause = true;
+        }
+
+        else if (Input.GetKeyDown("tab") && ispause == true)
+        {
+            cursor();
+            Time.timeScale = 1.0f;
+            pause.gameObject.SetActive(false);
+            ispause = false;
         }
     }
 
@@ -30,5 +39,20 @@ public class PauseButton : MonoBehaviour
     {
         ispause = yea;
         Time.timeScale = 1f;
+    }
+
+    public void cursor()
+    {
+        if(ispause == false)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else if (ispause == true)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+           
+        }
     }
 }

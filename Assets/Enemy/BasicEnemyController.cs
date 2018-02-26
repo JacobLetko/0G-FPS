@@ -120,6 +120,11 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
         }
     }
 
+    public float GetHealth()
+    {
+        return health;
+    }
+
     private void Kill()
     {
         explodeEffect.Play();

@@ -25,9 +25,20 @@ public class Bullet : MonoBehaviour {
         if(damagable != null)
         {
             damagable.Damage(damage);
-            CancelInvoke();
-            gameObject.SetActive(false);
         }
+        CancelInvoke();
+        gameObject.SetActive(false);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        IDamagable damagable = collision.gameObject.GetComponent<IDamagable>();
+        if (damagable != null)
+        {
+            damagable.Damage(damage);
+        }
+        CancelInvoke();
+        gameObject.SetActive(false);
     }
 
     private void DeactivateInvoke()

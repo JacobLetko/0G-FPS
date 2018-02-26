@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/ui/MainMenu.unity
     guid: 6c037fb74c7c8e4499129122fbbdb195
   - enabled: 1
+    path: Assets/GameScenes/TestLevel.unity
+    guid: d1bc1d73c53081f4f9293e760d38ec32
+  - enabled: 1
     path: Assets/ui/PauseMenu.unity
     guid: cfcc92dcf119dbe48b86c0762f24f7ba
   - enabled: 1

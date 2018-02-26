@@ -6,4 +6,6 @@ public interface IDamagable {
 
     void Damage(float amt);
 
+    float GetHealth();
+
 }

@@ -20,9 +20,18 @@ public class PauseButton : MonoBehaviour
     {
         if (Input.GetKeyDown("escape") && ispause == false)
         {
+            cursor();
             Time.timeScale = 0.0f;
             pause.gameObject.SetActive(true);
             ispause = true;
+        }
+
+        else if (Input.GetKeyDown("escape") && ispause == true)
+        {
+            cursor();
+            Time.timeScale = 1.0f;
+            pause.gameObject.SetActive(false);
+            ispause = false;
         }
     }
 
@@ -30,5 +39,17 @@ public class PauseButton : MonoBehaviour
     {
         ispause = yea;
         Time.timeScale = 1f;
+    }
+
+    public void cursor()
+    {
+        if(ispause == false)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else if (ispause == true)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 }

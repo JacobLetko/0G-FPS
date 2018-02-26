@@ -46,10 +46,12 @@ public class PauseButton : MonoBehaviour
         if(ispause == false)
         {
             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
         else if (ispause == true)
         {
             Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
     }
 }

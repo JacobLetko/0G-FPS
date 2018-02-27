@@ -157,6 +157,11 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114329833157795746, guid: 659aeae585c2c124fb8bbf47eec2b4f3,
+        type: 2}
+      propertyPath: m_Text
+      value: Ammo
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 659aeae585c2c124fb8bbf47eec2b4f3, type: 2}
   m_IsPrefabParent: 0

@@ -12,13 +12,14 @@ public static class HighScore
 
     public static List<int> scores = new List<int>();
     public static List<string> names = new List<string>();
-    public static GUIText scoretext;
-
+    
     public static string playerName;
 
     public static void sort()
     {
         int temp = score;
+        string tempN = playerName;
+        string tempN2;
         for(int i = 0; i < 10; i++)
         {
             if (scores[i] < temp)
@@ -26,6 +27,9 @@ public static class HighScore
                 temp = temp + scores[i];
                 scores[i] = temp - scores[i];
                 temp = temp - scores[i];
+
+                tempN2 = names[i];
+                names[i] = tempN;
             }
         }
     }

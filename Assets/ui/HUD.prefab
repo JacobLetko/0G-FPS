@@ -121,6 +121,7 @@ GameObject:
   - component: {fileID: 222516376016097282}
   - component: {fileID: 114974600928995214}
   - component: {fileID: 114901396104371026}
+  - component: {fileID: 114366448830766218}
   m_Layer: 5
   m_Name: Foreground
   m_TagString: Untagged
@@ -157,6 +158,19 @@ Transform:
   m_Father: {fileID: 224221868746926126}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114366448830766218
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1996238621606246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2adf9a70d7f319b488b843fd433aa774, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foregroundImage: {fileID: 114974600928995214}
+  player: {fileID: 0}
 --- !u!114 &114479262558124406
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -271,6 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2adf9a70d7f319b488b843fd433aa774, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  foregroundImage: {fileID: 0}
   player: {fileID: 0}
 --- !u!114 &114968080695097890
 MonoBehaviour:

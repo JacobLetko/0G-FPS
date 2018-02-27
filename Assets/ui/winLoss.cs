@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class winLoss : MonoBehaviour {
 
-    public IDamagable reactor;
-    public IDamagable player;
+    public ReactorController reactor;
+    public PlayerStats player;
     private bool win;
     
     // Use this for initialization

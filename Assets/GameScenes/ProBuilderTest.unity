@@ -180,6 +180,16 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: 114409172617818008, guid: 0b8e3806ccbd6da41b9c01712f63c0d9,
+        type: 2}
+      propertyPath: bullet.Array.data[0].beamType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114409172617818008, guid: 0b8e3806ccbd6da41b9c01712f63c0d9,
+        type: 2}
+      propertyPath: bullet.Array.data[0].damage
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0b8e3806ccbd6da41b9c01712f63c0d9, type: 2}
   m_IsPrefabParent: 0
@@ -7735,7 +7745,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-448760
+  m_Name: pb_Mesh24806
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -8128,6 +8138,16 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 3104029}
+    - target: {fileID: 224310835071878838, guid: d02033e8781f385419ab8e1d2314b1e4,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224310835071878838, guid: d02033e8781f385419ab8e1d2314b1e4,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114901396104371026, guid: d02033e8781f385419ab8e1d2314b1e4, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: d02033e8781f385419ab8e1d2314b1e4, type: 2}

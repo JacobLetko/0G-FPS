@@ -229,6 +229,48 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d368ee29f38a5ea41b9d92bf398c8f7b, type: 2}
   m_IsPrefabParent: 0
+--- !u!1001 &165309792
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4609336599680732, guid: c1ee8a115586bb44c952a6ed6fad7b68, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 2.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 4609336599680732, guid: c1ee8a115586bb44c952a6ed6fad7b68, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -4.042271
+      objectReference: {fileID: 0}
+    - target: {fileID: 4609336599680732, guid: c1ee8a115586bb44c952a6ed6fad7b68, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -9.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 4609336599680732, guid: c1ee8a115586bb44c952a6ed6fad7b68, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4609336599680732, guid: c1ee8a115586bb44c952a6ed6fad7b68, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4609336599680732, guid: c1ee8a115586bb44c952a6ed6fad7b68, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4609336599680732, guid: c1ee8a115586bb44c952a6ed6fad7b68, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4609336599680732, guid: c1ee8a115586bb44c952a6ed6fad7b68, type: 2}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: c1ee8a115586bb44c952a6ed6fad7b68, type: 2}
+  m_IsPrefabParent: 0
 --- !u!114 &347872150 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114823910264565796, guid: 1bddb3fdf40b0f3419d980cdb082e619,

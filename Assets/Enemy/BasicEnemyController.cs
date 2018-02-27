@@ -33,6 +33,7 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
     public BulletPool bulletPool;
     public GameObject bulletPrefab;
     public ParticleSystem explodeEffect;
+    public GameObject explodeParts;
 
     private float health;
     private bool alive = true;
@@ -163,6 +164,12 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
         audioSource.pitch = 1.0f;
         audioSource.PlayOneShot(explodeSound);
         alive = false;
+
+        transform.Find("Sphere").gameObject.SetActive(false);
+        explodeParts.SetActive(true);
+        
+        GetComponent<Collider>().enabled = false;
+        GetComponent<Renderer>().enabled = false;
     }
 
     private void Shoot()

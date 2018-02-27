@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class HUD : MonoBehaviour
 {
 
-    Image foregroundImage;
+    public Image foregroundImage;
     public PlayerStats player;
     float hp;
 

@@ -8123,6 +8123,11 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 3104029}
+    - target: {fileID: 114031609431061852, guid: d02033e8781f385419ab8e1d2314b1e4,
+        type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 3104029}
     m_RemovedComponents:
     - {fileID: 114901396104371026, guid: d02033e8781f385419ab8e1d2314b1e4, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: d02033e8781f385419ab8e1d2314b1e4, type: 2}

@@ -14,6 +14,7 @@ enum EnemyState
 public class BasicEnemyController : MonoBehaviour, IDamagable {
     
     public float maxHealth = 100.0f;
+    public int killScore = 100;
     public float rotationForce = 10.0f;
     public float gunCooldown = 0.5f;
     public float wobbleRange = 2.0f;
@@ -164,6 +165,8 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
         audioSource.pitch = 1.0f;
         audioSource.PlayOneShot(explodeSound);
         alive = false;
+
+        HighScore.addPoints(killScore);
 
         transform.Find("Sphere").gameObject.SetActive(false);
         explodeParts.SetActive(true);

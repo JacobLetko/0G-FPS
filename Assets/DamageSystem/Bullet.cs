@@ -41,7 +41,7 @@ public class Bullet : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
         IDamagable damagable = other.GetComponent<IDamagable>();
-        if(damagable != null)
+        if (damagable != null)
         {
             if (AOE != 0)
             {
@@ -52,6 +52,13 @@ public class Bullet : MonoBehaviour {
                 damagable.Damage(damage);
             }
 
+        }
+        else
+        {
+            if (AOE != 0)
+            {
+                AreaOfEffect();
+            }
         }
         CancelInvoke();
         gameObject.SetActive(false);
@@ -71,6 +78,13 @@ public class Bullet : MonoBehaviour {
                 damagable.Damage(damage);
             }
         }
+        else
+        {
+            if (AOE != 0)
+            {
+                AreaOfEffect();
+            }
+        }
         CancelInvoke();
         gameObject.SetActive(false);
     }
@@ -82,19 +96,23 @@ public class Bullet : MonoBehaviour {
 
     private void AreaOfEffect()
     {
+        //Debug.Log("Booom!");
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, AOE);//Physics.OverlapSphere(Explosion Source,Explosion radius)
         foreach (Collider other in hitColliders)
         {
-
-            float dist = (other.transform.position - transform.position).magnitude;
-
-            IDamagable damagable = other.GetComponent<IDamagable>();
-            if (damagable != null)
+            if (other.tag != "Player")
             {
-                damagable.Damage(damage * (1.0f-(dist/AOE)) );
+                float dist = (other.transform.position - transform.position).magnitude;
+
+                IDamagable damagable = other.GetComponent<IDamagable>();
+                if (damagable != null)
+                {
+                    damagable.Damage(damage * (1.0f - (dist / AOE)));
+                }
+
+                other.GetComponent<Rigidbody>().AddExplosionForce(damage * 2, transform.position, AOE);
             }
 
-            other.GetComponent<Rigidbody>().AddExplosionForce(damage * 2, transform.position, AOE);
 
             
         }

@@ -262,7 +262,7 @@ public class GunManager : MonoBehaviour
                     {
                         damagable.Damage(bullet[weaponIndex].damage);
                     }
-                    Debug.Log("Beam type 1");
+                    //Debug.Log("Beam type 1");
 
                 }
                 else
@@ -290,7 +290,7 @@ public class GunManager : MonoBehaviour
         {
             RaycastHit hitCollider;
             bool hit = Physics.Raycast(transform.position, transform.forward, out hitCollider);//Physics.OverlapSphere(Explosion Source,Explosion radius)
-            Debug.Log("type 2");
+            //Debug.Log("type 2");
             if (hit)
             {
 

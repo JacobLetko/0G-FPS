@@ -16,11 +16,11 @@ public class HUD : MonoBehaviour
     public void Start()
     {
         health = player.GetHealth();
-        ammo = gun.currentAmmo;
     }
 
     private void Update()
     {
+        ammo = gun.currentAmmo;
         healthbar.value = calchealth();
         score.display();
         ammoAmount.text = "Ammo " + ammo;

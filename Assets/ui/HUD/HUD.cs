@@ -21,7 +21,6 @@ public class HUD : MonoBehaviour
 
     float calchealth()
     {
-        Debug.Log(player.GetHealth());
         return player.GetHealth() / health;
 
     }

@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class ReactorController : MonoBehaviour, IDamagable
 {
 
     public float maxHealth = 1000.0f;
+    public int killScore = 1000;
     
     public AudioClip explodeSound;
     
@@ -48,7 +50,9 @@ public class ReactorController : MonoBehaviour, IDamagable
         audioSource.pitch = 1.0f;
         audioSource.PlayOneShot(explodeSound);
         alive = false;
-        
+
+        HighScore.addPoints(killScore);
+
         explodeParts.SetActive(true);
 
         GetComponent<Collider>().enabled = false;

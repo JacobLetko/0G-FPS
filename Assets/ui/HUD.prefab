@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 224665005150494000}
   - component: {fileID: 222516376016097282}
   - component: {fileID: 114974600928995214}
+  - component: {fileID: 114901396104371026}
   m_Layer: 5
   m_Name: Foreground
   m_TagString: Untagged
@@ -259,6 +260,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114901396104371026
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1996238621606246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2adf9a70d7f319b488b843fd433aa774, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
 --- !u!114 &114968080695097890
 MonoBehaviour:
   m_ObjectHideFlags: 1

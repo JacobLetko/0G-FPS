@@ -14,7 +14,7 @@ public class GunItem
 
     public string name;
 
-    [Range(0,100)]
+    [Range(0, 100)]
     public float accuracyModifier = 1;
 
     public float damage;
@@ -25,16 +25,16 @@ public class GunItem
 
     public float fireRate = 0.25f;
 
-    [Range(1,100000)]
+    [Range(1, 100000)]
     public int ammo = 100;
 
     public bool infinite = false;
 
-
+    public float splashRadius = 0;
 
     //public bool homing;
 
-    //public float splashRadius;
+
 
     //public bool unlocked;//determines if the weapons should be availible to the player to use. Not to be mistaken for if the object is active or not.
 
@@ -53,6 +53,9 @@ public class GunItem
 
     public bool loop = false;
 
+    [Header("Visuals")]
+
+    public bool hasTrail = false;
 
     //[HideInInspector]
     //public AudioSource source;

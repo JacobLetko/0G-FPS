@@ -7,12 +7,31 @@ public class Bullet : MonoBehaviour {
     public float damage = 10f;
     public float speed = 10f;
     public float lifetime = 2f;
+    public float AOE = 0;
+    public bool hasTrail = false;
 
-
+    TrailRenderer render;
 
     private void OnEnable()
     {
+        if (render == null)
+        {
+            render = GetComponent<TrailRenderer>();
+        }
+
+        render.enabled = false;
         Invoke("DeactivateInvoke", lifetime);
+        if (hasTrail)
+        {
+            Invoke("TrailOn", render.time + 0.01f);
+        }
+        
+
+    }
+
+    void TrailOn()
+    {       
+        render.enabled = true;
     }
 
     private void FixedUpdate () {
@@ -24,7 +43,15 @@ public class Bullet : MonoBehaviour {
         IDamagable damagable = other.GetComponent<IDamagable>();
         if(damagable != null)
         {
-            damagable.Damage(damage);
+            if (AOE != 0)
+            {
+                AreaOfEffect();
+            }
+            else
+            {
+                damagable.Damage(damage);
+            }
+
         }
         CancelInvoke();
         gameObject.SetActive(false);
@@ -35,7 +62,14 @@ public class Bullet : MonoBehaviour {
         IDamagable damagable = collision.gameObject.GetComponent<IDamagable>();
         if (damagable != null)
         {
-            damagable.Damage(damage);
+            if (AOE != 0)
+            {
+                AreaOfEffect();
+            }
+            else
+            {
+                damagable.Damage(damage);
+            }
         }
         CancelInvoke();
         gameObject.SetActive(false);
@@ -45,5 +79,26 @@ public class Bullet : MonoBehaviour {
     {
         gameObject.SetActive(false);
     }
+
+    private void AreaOfEffect()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, AOE);//Physics.OverlapSphere(Explosion Source,Explosion radius)
+        foreach (Collider other in hitColliders)
+        {
+
+            float dist = (other.transform.position - transform.position).magnitude;
+
+            IDamagable damagable = other.GetComponent<IDamagable>();
+            if (damagable != null)
+            {
+                damagable.Damage(damage * (1.0f-(dist/AOE)) );
+            }
+
+            other.GetComponent<Rigidbody>().AddExplosionForce(damage * 2, transform.position, AOE);
+
+            
+        }
+    }
+
 
 }

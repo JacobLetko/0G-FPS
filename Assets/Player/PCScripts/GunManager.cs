@@ -168,7 +168,8 @@ public class GunManager : MonoBehaviour
         bulletObj.GetComponent<Bullet>().damage = bullet[weaponIndex].damage;
         bulletObj.GetComponent<Bullet>().speed = bullet[weaponIndex].speed;
         bulletObj.GetComponent<Bullet>().lifetime = bullet[weaponIndex].lifetime;
-
+        bulletObj.GetComponent<Bullet>().AOE = bullet[weaponIndex].splashRadius;
+        bulletObj.GetComponent<Bullet>().hasTrail = bullet[weaponIndex].hasTrail;
         infiniteAmmo = bullet[weaponIndex].infinite;
 
     }

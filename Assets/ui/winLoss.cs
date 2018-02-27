@@ -8,13 +8,7 @@ public class winLoss : MonoBehaviour {
     public ReactorController reactor;
     public PlayerStats player;
     private bool invoking;
-    
-    // Use this for initialization
-	void Start ()
-    {
 
-	}
-	
 	// Update is called once per frame
 	void Update ()
     {
@@ -39,12 +33,16 @@ public class winLoss : MonoBehaviour {
     public void SwitchScreenWin()
     {
         CancelInvoke();
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene("Win");
     }
 
     public void SwitchScreenLose()
     {
         CancelInvoke();
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene("GameOver");
     }
     

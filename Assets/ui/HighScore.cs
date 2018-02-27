@@ -2,43 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HighScore : MonoBehaviour {
+public static class HighScore
+{
+    static int score;
+    static public bool show;
 
-    [Header("Score")]
-    public int score;
-    public List<int> scores;
-    public List<string> names;
+    public static string playerName;
 
-    [Header("points")]
-    public int Epoints;
-    public bool levelComplete;
-    public int health;
-    public int shileds;
-    public int ammo;
-    
-    // Use this for initialization
-	void Start ()
+    static void table()
     {
-        resetScore();
-        getList();
-	}
+        for (int i = 0; i < 10; i++)
+        {
+            if(score > PlayerPrefs.GetInt("score"+i))
+            {
 
-    void Update()
-    {
-        
+            }
+        }
     }
 
-    public void resetScore()
+    public static void resetScore()
     {
         score = 0;
     }
 
-    void getList()
+    public static void addPoints(int points)
     {
-        for (int i = 0; i < 10; i++)
-        {
-            scores.Add(PlayerPrefs.GetInt("scores" + i));
-            names.Add(PlayerPrefs.GetString("names" + i));
-        }
+        score += points;
     }
 }

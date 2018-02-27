@@ -180,12 +180,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8c9784d5dca69554490629f86f9758b7, type: 2}
   m_IsPrefabParent: 0
---- !u!82 &697673298 stripped
-AudioSource:
-  m_PrefabParentObject: {fileID: 82027789881319052, guid: 57bbb3ef8a802f847bc62c0fbc323f0c,
-    type: 2}
-  m_PrefabInternal: {fileID: 2095854687}
---- !u!1001 &965258169
+--- !u!1001 &697304307
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -222,11 +217,31 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4028641524046710, guid: d02033e8781f385419ab8e1d2314b1e4, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 224310835071878838, guid: d02033e8781f385419ab8e1d2314b1e4,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224310835071878838, guid: d02033e8781f385419ab8e1d2314b1e4,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224156552471180576, guid: d02033e8781f385419ab8e1d2314b1e4,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 65
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d02033e8781f385419ab8e1d2314b1e4, type: 2}
   m_IsPrefabParent: 0
+--- !u!82 &697673298 stripped
+AudioSource:
+  m_PrefabParentObject: {fileID: 82027789881319052, guid: 57bbb3ef8a802f847bc62c0fbc323f0c,
+    type: 2}
+  m_PrefabInternal: {fileID: 2095854687}
 --- !u!1001 &1211175102
 Prefab:
   m_ObjectHideFlags: 0
@@ -264,7 +279,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4223902394785840, guid: c17bf11add2022e499c93f3b0640276d, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1291015384943142, guid: c17bf11add2022e499c93f3b0640276d, type: 2}
       propertyPath: m_Name

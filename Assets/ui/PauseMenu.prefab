@@ -655,6 +655,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pause: {fileID: 1315818854900200}
   ispause: 0
+  score: {fileID: 0}
 --- !u!114 &114942060504713658
 MonoBehaviour:
   m_ObjectHideFlags: 1

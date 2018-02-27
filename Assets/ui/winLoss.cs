@@ -7,7 +7,7 @@ public class winLoss : MonoBehaviour {
 
     public ReactorController reactor;
     public PlayerStats player;
-    private bool win;
+    private bool invoking;
     
     // Use this for initialization
 	void Start ()
@@ -20,11 +20,32 @@ public class winLoss : MonoBehaviour {
     {
 	    if(reactor.GetHealth() <= 0)
         {
-            SceneManager.LoadScene("Win");
+            if (invoking == false)
+            {
+                Invoke("SwitchScreenWin", 3.0f);
+                invoking = true;
+            }
         }
         else if(player.GetHealth() <= 0)
         {
-            SceneManager.LoadScene("GameOver");
+            if (invoking == false)
+            {
+                Invoke("SwitchScreenLose", 3.0f);
+                invoking = true;
+            }
         }
 	}
+
+    public void SwitchScreenWin()
+    {
+        CancelInvoke();
+        SceneManager.LoadScene("Win");
+    }
+
+    public void SwitchScreenLose()
+    {
+        CancelInvoke();
+        SceneManager.LoadScene("GameOver");
+    }
+    
 }

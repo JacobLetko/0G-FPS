@@ -8,7 +8,6 @@ public class winLoss : MonoBehaviour {
     public ReactorController reactor;
     public PlayerStats player;
     private bool invoking;
-    public HighScore scoresystem;
 
 	// Update is called once per frame
 	void Update ()

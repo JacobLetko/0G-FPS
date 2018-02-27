@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HighScore : MonoBehaviour
-{ 
+public static class HighScore
+{
 
-    int score;
-    public bool show;
+    static int score;
+    static public bool show;
 
-    public string playerName;
+    public static string playerName;
 
-    void table()
+    static void table()
     {
         for (int i = 0; i < 10; i++)
         {
@@ -21,12 +21,12 @@ public class HighScore : MonoBehaviour
         }
     }
 
-    public void resetScore()
+    public static void resetScore()
     {
         score = 0;
     }
 
-    public void addPoints(int points)
+    public static void addPoints(int points)
     {
         score += points;
     }

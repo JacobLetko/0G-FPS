@@ -8,6 +8,8 @@ public class PauseButton : MonoBehaviour
     public GameObject pause;
     public bool ispause;
 
+    public HighScoreBehavior score;
+
     // Use this for initialization
     void Start()
     {
@@ -33,6 +35,8 @@ public class PauseButton : MonoBehaviour
             Time.timeScale = 1.0f;
             pause.gameObject.SetActive(false);
         }
+
+        score.display();
     }
 
     public void isPause(bool yea)

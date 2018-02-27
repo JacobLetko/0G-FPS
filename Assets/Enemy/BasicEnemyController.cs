@@ -2,8 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicEnemyController : MonoBehaviour, IDamagable {
 
+enum EnemyState
+{
+    Idle,
+    Attacking,
+    Chasing
+};
+
+
+public class BasicEnemyController : MonoBehaviour, IDamagable {
+    
     public float maxHealth = 100.0f;
     public float rotationForce = 10.0f;
     public float gunCooldown = 0.5f;

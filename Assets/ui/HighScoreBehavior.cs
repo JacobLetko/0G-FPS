@@ -19,4 +19,9 @@ public class HighScoreBehavior : MonoBehaviour {
             scoretext.text = "1.    " + HighScore.names[i] + "   " + HighScore.scores[i] + "\n";
         }
     }
+
+    public void addName(Text name)
+    {
+        HighScore.playerName = name.ToString();
+    }
 }

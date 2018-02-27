@@ -6,8 +6,12 @@ using UnityEngine.UI;
 public class HUD : MonoBehaviour
 {
     public float health;
+    public int ammo;
     public PlayerStats player;
     public Slider healthbar;
+    public GunManager gun;
+    public HighScoreBehavior score;
+    public Text ammoAmount;
 
     public void Start()
     {
@@ -16,7 +20,10 @@ public class HUD : MonoBehaviour
 
     private void Update()
     {
+        ammo = gun.currentAmmo;
         healthbar.value = calchealth();
+        score.display();
+        ammoAmount.text = "Ammo " + ammo;
     }
 
     float calchealth()

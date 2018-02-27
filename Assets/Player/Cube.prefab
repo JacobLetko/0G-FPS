@@ -278,34 +278,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LineRend: {fileID: 0}
   bullet:
-  - isBeam: 1
+  - beamType: 1
     speed: 50
     lifetime: 1
     hasTrail: 1
     accuracyModifier: 2
     material: {fileID: 2100000, guid: 31cf560cbedc5e34bbb821a94055e6b2, type: 2}
     name: Particle Cannon
-    damage: 10
+    damage: 50
     fireRate: 0.1
     ammo: 51575
     infinite: 1
     splashRadius: 0
-    clip: {fileID: 8300000, guid: f1364d48e48ea4fdab44868cc9b2a10e, type: 3}
-    volume: 0.5
-    pitch: 1
+    clip: {fileID: 8300000, guid: 476c9e909434541d9a0e665e934cd626, type: 3}
+    volume: 0.73
+    pitch: 3
     loop: 0
-  - isBeam: 0
+  - beamType: 0
     speed: 50
-    lifetime: 1
-    hasTrail: 0
-    accuracyModifier: 1
+    lifetime: 2
+    hasTrail: 1
+    accuracyModifier: 0
     material: {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
     name: HE Cannon
-    damage: 10
-    fireRate: 0.25
-    ammo: 100
-    infinite: 1
-    splashRadius: 0
+    damage: 115
+    fireRate: 1
+    ammo: 28139
+    infinite: 0
+    splashRadius: 10
     clip: {fileID: 8300000, guid: 548113de6462a924e804330926221ad8, type: 3}
     volume: 1
     pitch: 1

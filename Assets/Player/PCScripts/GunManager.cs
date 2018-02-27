@@ -262,7 +262,7 @@ public class GunManager : MonoBehaviour
                     {
                         damagable.Damage(bullet[weaponIndex].damage);
                     }
-                    Debug.Log("Beam type 1");
+                    //Debug.Log("Beam type 1");
 
                 }
                 else
@@ -290,25 +290,27 @@ public class GunManager : MonoBehaviour
         {
             RaycastHit hitCollider;
             bool hit = Physics.Raycast(transform.position, transform.forward, out hitCollider);//Physics.OverlapSphere(Explosion Source,Explosion radius)
-            Debug.Log("type 2");
+            //Debug.Log("type 2");
             if (hit)
             {
-
-
-                LineRend.SetPosition(1, hitCollider.point);
-
-                LineRend.enabled = true;
-
-                if (bullet[weaponIndex].splashRadius > 0)
+                if (hitCollider.transform.tag != "Player")
                 {
-                    AreaOfEffect_Beam(hitCollider.point, bullet[weaponIndex].splashRadius);
+                    LineRend.SetPosition(1, hitCollider.point);
+
+                    LineRend.enabled = true;
+
+                    if (bullet[weaponIndex].splashRadius > 0)
+                    {
+                        AreaOfEffect_Beam(hitCollider.point, bullet[weaponIndex].splashRadius);
+                    }
+
+                    IDamagable damagable = hitCollider.transform.GetComponent<IDamagable>();
+                    if (damagable != null)
+                    {
+                        damagable.Damage(bullet[weaponIndex].damage * Time.deltaTime);
+                    }
                 }
 
-                IDamagable damagable = hitCollider.transform.GetComponent<IDamagable>();
-                if (damagable != null)
-                {
-                    damagable.Damage(bullet[weaponIndex].damage * Time.deltaTime);
-                }
 
             }
             else
@@ -344,16 +346,19 @@ public class GunManager : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, AOE);//Physics.OverlapSphere(Explosion Source,Explosion radius)
         foreach (Collider other in hitColliders)
         {
-
-            float dist = (other.transform.position - transform.position).magnitude;
-
-            IDamagable damagable = other.GetComponent<IDamagable>();
-            if (damagable != null)
+            if (other.tag != "Player")
             {
-                damagable.Damage(bullet[weaponIndex].damage * (1.0f - (dist / AOE)));
+                float dist = (other.transform.position - transform.position).magnitude;
+
+                IDamagable damagable = other.GetComponent<IDamagable>();
+                if (damagable != null)
+                {
+                    damagable.Damage(bullet[weaponIndex].damage * (1.0f - (dist / AOE)));
+                }
+
+                other.GetComponent<Rigidbody>().AddExplosionForce(bullet[weaponIndex].damage * 2, transform.position, AOE);
             }
 
-            other.GetComponent<Rigidbody>().AddExplosionForce(bullet[weaponIndex].damage * 2, transform.position, AOE);
         }
     }
 

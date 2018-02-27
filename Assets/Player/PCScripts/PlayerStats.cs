@@ -17,6 +17,7 @@ public class PlayerStats : MonoBehaviour, IDamagable
         //    shieldPoints -= amt;
         //}
         hitPoints -= amt;
+        Mathf.Clamp(hitPoints, 0, 100);
 
     }
 

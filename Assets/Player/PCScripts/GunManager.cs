@@ -71,6 +71,7 @@ public class GunManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        currentAmmo = bullet[weaponIndex].ammo;
         timer += Time.deltaTime;
         //Input controls here
 
@@ -84,6 +85,7 @@ public class GunManager : MonoBehaviour
             {
                 weaponIndex = 0;
             }
+            infiniteAmmo = bullet[weaponIndex].infinite;
 
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
@@ -96,6 +98,7 @@ public class GunManager : MonoBehaviour
             {
                 weaponIndex = bullet.Length - 1;
             }
+            infiniteAmmo = bullet[weaponIndex].infinite;
         }
 
 
@@ -214,7 +217,7 @@ public class GunManager : MonoBehaviour
         bulletObj.GetComponent<Bullet>().lifetime = bullet[weaponIndex].lifetime;
         bulletObj.GetComponent<Bullet>().AOE = bullet[weaponIndex].splashRadius;
         bulletObj.GetComponent<Bullet>().hasTrail = bullet[weaponIndex].hasTrail;
-        infiniteAmmo = bullet[weaponIndex].infinite;
+        
 
     }
 
@@ -230,8 +233,6 @@ public class GunManager : MonoBehaviour
 
     void BeamCast()
     {
-        infiniteAmmo = bullet[weaponIndex].infinite;
-
 
         LineRend.material = bullet[weaponIndex].material;
         if (bullet[weaponIndex].beamType == 1)

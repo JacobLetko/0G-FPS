@@ -187,8 +187,13 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114409172617818008, guid: 0b8e3806ccbd6da41b9c01712f63c0d9,
         type: 2}
+      propertyPath: bullet.Array.data[1].ammo
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114409172617818008, guid: 0b8e3806ccbd6da41b9c01712f63c0d9,
+        type: 2}
       propertyPath: bullet.Array.data[0].damage
-      value: 50
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0b8e3806ccbd6da41b9c01712f63c0d9, type: 2}
@@ -7974,7 +7979,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh24806
+  m_Name: pb_Mesh35616
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2

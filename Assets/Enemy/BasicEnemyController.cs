@@ -58,16 +58,25 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
             gunHeat -= Time.deltaTime;
         }
         
-		if(alive)
+		if(alive && gunHeat <= 0 && state == EnemyState.Attacking)
         {
-            RaycastHit hit;
-            if (gunHeat <= 0 && Physics.Raycast(transform.position, transform.forward, out hit))
+            //RaycastHit hit;
+            //if (gunHeat <= 0 && Physics.Raycast(transform.position, transform.forward, out hit))
+            //{
+            //    if (hit.transform.CompareTag("Player"))
+            //    {
+            //        Shoot();
+            //        gunHeat = gunCooldown;
+            //    }
+            //}
+
+            Vector3 toPlayer = player.position - transform.position;
+            float ang = Vector3.Angle(toPlayer, transform.forward);
+            
+            if(ang <= 20)
             {
-                if (hit.transform.CompareTag("Player"))
-                {
-                    Shoot();
-                    gunHeat = gunCooldown;
-                }
+                Shoot();
+                gunHeat = gunCooldown;
             }
         }
 	}

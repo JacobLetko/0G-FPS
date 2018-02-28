@@ -7,6 +7,8 @@ public class HealthPickup : MonoBehaviour {
     public float healAmt = 25.0f;
     public int scoreOnPickup = 10;
 
+    public GameObject audioPlayer;
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -15,6 +17,8 @@ public class HealthPickup : MonoBehaviour {
         {
             player.Damage(-healAmt);
             HighScore.addPoints(scoreOnPickup);
+            audioPlayer.SetActive(true);
+            audioPlayer.transform.parent = null;
             gameObject.SetActive(false);
         }
     }

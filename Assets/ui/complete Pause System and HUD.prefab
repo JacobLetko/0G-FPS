@@ -960,7 +960,7 @@ MonoBehaviour:
   player: {fileID: 0}
   healthbar: {fileID: 114904997638501482}
   gun: {fileID: 0}
-  score: {fileID: 0}
+  score: {fileID: 114661498980247408}
   ammoAmount: {fileID: 114329833157795746}
 --- !u!114 &114140142493251972
 MonoBehaviour:

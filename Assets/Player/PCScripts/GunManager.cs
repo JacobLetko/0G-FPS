@@ -63,6 +63,7 @@ public class GunManager : MonoBehaviour
         //selectedWeapon = weaponIndex;
         timer = bullet[weaponIndex].fireRate;
         currentAmmo = bullet[weaponIndex].ammo;
+        infiniteAmmo = bullet[weaponIndex].infinite;
         //set default bullet settings here
 
 

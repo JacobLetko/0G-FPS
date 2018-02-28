@@ -208,8 +208,6 @@ public class GunManager : MonoBehaviour
 
     void SwitchBullet(GameObject bulletObj)
     {
-
-
         bulletObj.GetComponent<MeshRenderer>().material = bullet[weaponIndex].material;
         bulletObj.GetComponent<Bullet>().damage = bullet[weaponIndex].damage;
         bulletObj.GetComponent<Bullet>().speed = bullet[weaponIndex].speed;
@@ -232,8 +230,8 @@ public class GunManager : MonoBehaviour
 
     void BeamCast()
     {
+        infiniteAmmo = bullet[weaponIndex].infinite;
 
-        
 
         LineRend.material = bullet[weaponIndex].material;
         if (bullet[weaponIndex].beamType == 1)

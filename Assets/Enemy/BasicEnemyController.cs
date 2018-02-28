@@ -25,6 +25,8 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
     public float bulletDamage = 10.0f;
     public Vector2 shootPitchRange = new Vector2(0.9f, 1.1f);
 
+    public bool chaser = false;
+
     public AudioClip shootSound;
     public AudioClip explodeSound;
 
@@ -85,6 +87,11 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
     {
         if (alive)
         {
+            if(chaser)
+            {
+                Debug.Log(startPos);
+                startPos = player.position;
+            }
 
             if (Vector3.Distance(transform.position, trgPos) <= wobbleReachDist)
             {

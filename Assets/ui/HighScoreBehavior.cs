@@ -13,7 +13,7 @@ public class HighScoreBehavior : MonoBehaviour {
 
     public void display()
     {
-        scoretext.text = "" + HighScore.score;
+        scoretext.text = "Score: " + HighScore.score;
     }
 
     public void table()

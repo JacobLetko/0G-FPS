@@ -33,6 +33,7 @@ public class HighScoreBehavior : MonoBehaviour {
 
     public void addName(Text name)
     {
+        Debug.Log("OOOOIIIIIII");
         HighScore.playerName = name.text.ToString();
         HighScore.save();
     }

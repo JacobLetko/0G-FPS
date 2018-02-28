@@ -23,7 +23,14 @@ public class HUD : MonoBehaviour
         ammo = gun.currentAmmo;
         healthbar.value = calchealth();
         score.display();
-        ammoAmount.text = "Ammo " + ammo;
+        if (gun.infiniteAmmo == true)
+        {
+            ammoAmount.text = "Ammo: INF";
+        }
+        else
+        {
+            ammoAmount.text = "ammo: " + ammo;
+        }
     }
 
     float calchealth()

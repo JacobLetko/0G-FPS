@@ -100,21 +100,24 @@ public class Bullet : MonoBehaviour {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, AOE);//Physics.OverlapSphere(Explosion Source,Explosion radius)
         foreach (Collider other in hitColliders)
         {
-            if (other.tag != "Player")
+            if (other != null)
             {
-                float dist = (other.transform.position - transform.position).magnitude;
-
-                IDamagable damagable = other.GetComponent<IDamagable>();
-                if (damagable != null)
+                if (other.GetComponent<Rigidbody>() != null)
                 {
-                    damagable.Damage(damage * (1.0f - (dist / AOE)));
+                    if (other.tag != "Player")
+                    {
+                        float dist = (other.transform.position - transform.position).magnitude;
+
+                        IDamagable damagable = other.GetComponent<IDamagable>();
+                        if (damagable != null)
+                        {
+                            damagable.Damage(damage * (1.0f - (dist / AOE)));
+                        }
+
+                        other.GetComponent<Rigidbody>().AddExplosionForce(damage * 2, transform.position, AOE);
+                    }
                 }
-
-                other.GetComponent<Rigidbody>().AddExplosionForce(damage * 2, transform.position, AOE);
             }
-
-
-            
         }
     }
 

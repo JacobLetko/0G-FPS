@@ -15,6 +15,7 @@ public class ReactorController : MonoBehaviour, IDamagable
     public ParticleSystem explodeEffect;
     public GameObject explodeParts;
     public GameObject renderObj;
+    public GameObject[] damageEffects;
 
     private float health;
     private bool alive = true;
@@ -33,6 +34,16 @@ public class ReactorController : MonoBehaviour, IDamagable
         if (alive)
         {
             health = Mathf.Clamp(health - amt, 0.0f, maxHealth);
+
+            float dmgLvl = maxHealth / damageEffects.Length;
+            for(int i = 0; i < damageEffects.Length; ++i)
+            {
+                if(health <= (i+1) * dmgLvl)
+                {
+                    damageEffects[i].SetActive(true);
+                }
+            }
+
             if (health <= 0)
             {
                 Kill();

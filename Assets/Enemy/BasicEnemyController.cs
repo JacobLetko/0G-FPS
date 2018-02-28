@@ -37,6 +37,7 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
     public GameObject bulletPrefab;
     public ParticleSystem explodeEffect;
     public GameObject explodeParts;
+    public GameObject modelObj;
 
     private float health;
     private bool alive = true;
@@ -89,7 +90,6 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
         {
             if(chaser)
             {
-                Debug.Log(startPos);
                 startPos = player.position;
             }
 
@@ -183,12 +183,11 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
         alive = false;
 
         HighScore.addPoints(killScore);
-
-        transform.Find("Sphere").gameObject.SetActive(false);
-        explodeParts.SetActive(true);
         
+        explodeParts.SetActive(true);
+
         GetComponent<Collider>().enabled = false;
-        GetComponent<Renderer>().enabled = false;
+        modelObj.GetComponent<Renderer>().enabled = false;
     }
 
     private void Shoot()

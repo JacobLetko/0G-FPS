@@ -14,6 +14,7 @@ public class ReactorController : MonoBehaviour, IDamagable
     public AudioSource audioSource;
     public ParticleSystem explodeEffect;
     public GameObject explodeParts;
+    public GameObject renderObj;
 
     private float health;
     private bool alive = true;
@@ -56,7 +57,8 @@ public class ReactorController : MonoBehaviour, IDamagable
         explodeParts.SetActive(true);
 
         GetComponent<Collider>().enabled = false;
-        GetComponent<Renderer>().enabled = false;
+        //GetComponent<Renderer>().enabled = false;
+        renderObj.SetActive(false);
     }
 
 }

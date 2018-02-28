@@ -10,32 +10,60 @@ public static class HighScore
     public static int score;
     static public bool show;
 
-    public static List<int> scores = new List<int>();
-    public static List<string> names = new List<string>();
+
+    public static int[] scores = new int[10];
+    public static string[] names = new string[10];
     
     public static string playerName;
 
+
+
     public static void sort()
     {
-        int temp = score;
-        string tempN = playerName;
-        string tempN2;
-        for(int i = 0; i < 10; i++)
-        {
-            if (scores[i] < temp)
-            {
-                temp = temp + scores[i];
-                scores[i] = temp - scores[i];
-                temp = temp - scores[i];
+        //Loop through the capacity, (This is what data we already have)
 
-                tempN2 = names[i];
-                names[i] = tempN;
+        //Loop through the remaining and add new data
+
+        load();
+
+        int[] tempS = new int[10];
+        string[] tempN = new string[10];
+        bool scoreIn = false;
+
+        for (int i = 0; i < 10; i++)
+        {
+            if (scores[i] < score && scoreIn == false)
+            {
+                tempS[i] = score;
+                tempN[i] = playerName;
+                if (i != 9)
+                {
+                    tempS[i + 1] = scores[i];
+                    tempN[i + 1] = names[i];
+                }
+                scoreIn = true;
+            }
+            else if (scores[i] < score && scoreIn == true)
+            {
+                if (i != 9)
+                {
+                    tempS[i + 1] = scores[i];
+                    tempN[i + 1] = names[i];
+                }
+            }
+            else
+            {
+                tempS[i] = scores[i];
+                tempN[i] = names[i];
             }
         }
+        scores = tempS;
+        names = tempN;
     }
 
     public static void save()
     {
+        sort();
         BinaryFormatter bf = new BinaryFormatter();
         
         //scores
@@ -45,8 +73,8 @@ public static class HighScore
 
         //names
         FileStream file2 = File.Create(Application.persistentDataPath + "/Names.gd");
-        bf.Serialize(file, HighScore.names);
-        file.Close();
+        bf.Serialize(file2, HighScore.names);
+        file2.Close();
     }
     public static void load()
     {
@@ -56,16 +84,15 @@ public static class HighScore
         if (File.Exists(Application.persistentDataPath + "/Scores.gd"))
         {    
             FileStream file = File.Open(Application.persistentDataPath + "/Scores.gd", FileMode.Open);
-            HighScore.scores = (List<int>)bf.Deserialize(file);
+            HighScore.scores = (int[])bf.Deserialize(file);
             file.Close();
         }
         if (File.Exists(Application.persistentDataPath + "/Names.gd"))
         {
             FileStream file = File.Open(Application.persistentDataPath + "/Names.gd", FileMode.Open);
-            HighScore.names = (List<string>)bf.Deserialize(file);
+            HighScore.names = (string[])bf.Deserialize(file);
             file.Close();
         }
-
     }
 
     public static void resetScore()

@@ -287,11 +287,11 @@ MonoBehaviour:
     name: Particle Cannon
     damage: 50
     fireRate: 0.1
-    ammo: 51575
+    ammo: 100
     infinite: 1
     splashRadius: 0
     clip: {fileID: 8300000, guid: 476c9e909434541d9a0e665e934cd626, type: 3}
-    volume: 0.73
+    volume: 0.404
     pitch: 3
     loop: 0
   - beamType: 0
@@ -303,11 +303,11 @@ MonoBehaviour:
     name: HE Cannon
     damage: 115
     fireRate: 1
-    ammo: 28139
+    ammo: 10
     infinite: 0
     splashRadius: 10
     clip: {fileID: 8300000, guid: 548113de6462a924e804330926221ad8, type: 3}
-    volume: 1
+    volume: 0.552
     pitch: 1
     loop: 0
   bulletPool: {fileID: 0}

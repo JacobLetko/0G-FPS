@@ -25,6 +25,8 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
     public float bulletDamage = 10.0f;
     public Vector2 shootPitchRange = new Vector2(0.9f, 1.1f);
 
+    public bool chaser = false;
+
     public AudioClip shootSound;
     public AudioClip explodeSound;
 
@@ -35,6 +37,7 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
     public GameObject bulletPrefab;
     public ParticleSystem explodeEffect;
     public GameObject explodeParts;
+    public GameObject modelObj;
 
     private float health;
     private bool alive = true;
@@ -58,16 +61,25 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
             gunHeat -= Time.deltaTime;
         }
         
-		if(alive)
+		if(alive && gunHeat <= 0 && state == EnemyState.Attacking)
         {
-            RaycastHit hit;
-            if (gunHeat <= 0 && Physics.Raycast(transform.position, transform.forward, out hit))
+            //RaycastHit hit;
+            //if (gunHeat <= 0 && Physics.Raycast(transform.position, transform.forward, out hit))
+            //{
+            //    if (hit.transform.CompareTag("Player"))
+            //    {
+            //        Shoot();
+            //        gunHeat = gunCooldown;
+            //    }
+            //}
+
+            Vector3 toPlayer = player.position - transform.position;
+            float ang = Vector3.Angle(toPlayer, transform.forward);
+            
+            if(ang <= 20)
             {
-                if (hit.transform.CompareTag("Player"))
-                {
-                    Shoot();
-                    gunHeat = gunCooldown;
-                }
+                Shoot();
+                gunHeat = gunCooldown;
             }
         }
 	}
@@ -76,6 +88,10 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
     {
         if (alive)
         {
+            if(chaser)
+            {
+                startPos = player.position;
+            }
 
             if (Vector3.Distance(transform.position, trgPos) <= wobbleReachDist)
             {
@@ -167,12 +183,11 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
         alive = false;
 
         HighScore.addPoints(killScore);
-
-        transform.Find("Sphere").gameObject.SetActive(false);
-        explodeParts.SetActive(true);
         
+        explodeParts.SetActive(true);
+
         GetComponent<Collider>().enabled = false;
-        GetComponent<Renderer>().enabled = false;
+        modelObj.GetComponent<Renderer>().enabled = false;
     }
 
     private void Shoot()

@@ -8,6 +8,8 @@ public class AmmoPickup : MonoBehaviour {
     public int ammoType = 1;
     public int scoreOnPickup = 10;
 
+    public GameObject audioPlayer;
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -16,6 +18,8 @@ public class AmmoPickup : MonoBehaviour {
         {
             player.bullet[ammoType].ammo += ammoAmt;
             HighScore.addPoints(scoreOnPickup);
+            audioPlayer.SetActive(true);
+            audioPlayer.transform.parent = null;
             gameObject.SetActive(false);
         }
     }

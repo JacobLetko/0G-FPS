@@ -310,7 +310,7 @@ MonoBehaviour:
     damage: 115
     fireRate: 1
     ammo: 10
-    infinite: 1
+    infinite: 0
     splashRadius: 10
     clip: {fileID: 8300000, guid: 548113de6462a924e804330926221ad8, type: 3}
     volume: 0.552

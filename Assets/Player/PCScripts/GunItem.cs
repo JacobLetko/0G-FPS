@@ -31,6 +31,10 @@ public class GunItem
     //-------------------------------------------------------------
     [Space]
 
+    public AudioClip contactSound;
+
+    public ParticleSystem contactEffect;
+
     public Material material;
 
     public string name;

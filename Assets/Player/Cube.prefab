@@ -308,7 +308,7 @@ MonoBehaviour:
     material: {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
     name: HE Cannon
     damage: 115
-    fireRate: 0.1
+    fireRate: 1
     ammo: 10
     infinite: 1
     splashRadius: 10

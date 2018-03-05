@@ -47,6 +47,7 @@ public class PlayerCam : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         normalDrag = myRig.drag;
         normalAngularDrag = myRig.angularDrag;
+
     }
 
 
@@ -91,7 +92,15 @@ public class PlayerCam : MonoBehaviour
         myRig.AddRelativeTorque(Vector3.left * Input.GetAxis("Mouse Y") * mouseSensY);
 
 
-
+        if (Input.GetKey("x"))
+        {
+            ThirdPerson();
+        }
+        else
+        {
+            camT.transform.position = transform.position + new Vector3(0, 0.1f, 0);
+            camT.rotation = transform.rotation;
+        }
 
 
 
@@ -177,6 +186,59 @@ public class PlayerCam : MonoBehaviour
 
 
 
+
+
+
+
+    }
+
+
+    private void ThirdPerson()
+    {
+
+        RaycastHit hitCollider;    
+        bool hit = Physics.Raycast(transform.position, transform.up, out hitCollider, 1f);
+
+        RaycastHit hitCollider2;
+        bool hit2 = Physics.Raycast(transform.position, -transform.forward, out hitCollider2, 1f);
+
+        camT.transform.localPosition = new Vector3(0, 1, -1);
+
+        if (hit)
+        {
+            Debug.Log("hit");
+            float distance = Vector3.Distance(transform.position, hitCollider.point);
+
+            camT.transform.localPosition -= new Vector3(0, (camT.transform.localPosition.y - distance), 0);
+
+            //if (distance >= 0.35)
+            //{
+            //    camT.transform.localPosition -= new Vector3(0, (camT.transform.localPosition.y - distance) + (0.1f  * distance - camT.transform.localPosition.y) , 0);
+            //}
+            //else
+            //{
+            //    camT.transform.localPosition -= new Vector3(0, camT.transform.localPosition.y - (distance - 0.3f), 0);
+            //}
+
+        }
+
+        if (hit2)
+        {
+            float distance = Vector3.Distance(transform.position, hitCollider2.point) + 0.3f;
+            Debug.Log("hit2");
+
+            camT.transform.localPosition -= new Vector3(0, 0, camT.transform.localPosition.z - distance);
+
+
+            //if (distance >= 0.35)
+            //{
+            //    camT.transform.localPosition -= new Vector3(0, 0, camT.transform.localPosition.z - distance);
+            //}
+            //else
+            //{
+            //    camT.transform.localPosition -= new Vector3(0, 0, camT.transform.localPosition.z - (distance - 0.3f));
+            //}
+        }
 
 
 

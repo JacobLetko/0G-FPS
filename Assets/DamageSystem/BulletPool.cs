@@ -7,7 +7,8 @@ public class BulletPool : MonoBehaviour {
 
     public int initialSize = 200;
     public GameObject bulletPrefab;
-
+    public GameObject[] particleEffects;
+    
     private GameObject[] pool;
 
 
@@ -18,6 +19,14 @@ public class BulletPool : MonoBehaviour {
         for(int i = 0; i < initialSize; ++i)
         {
             pool[i] = Instantiate(bulletPrefab);
+            foreach(GameObject o in particleEffects)
+            {
+                GameObject g = Instantiate(o);
+                g.transform.parent = pool[i].transform;
+                g.transform.position = pool[i].transform.position;
+                g.transform.rotation = pool[i].transform.rotation;
+                g.SetActive(false);
+            }
             pool[i].SetActive(false);
         }
     }

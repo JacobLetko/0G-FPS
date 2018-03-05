@@ -32,7 +32,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4925705231084696
 Transform:
   m_ObjectHideFlags: 1
@@ -282,7 +282,9 @@ MonoBehaviour:
   AOE: 0
   hasTrail: 0
   sfxSource: {fileID: 82938064853046586}
-  contactSound: {fileID: 0}
+  myRenderer: {fileID: 23524428783782418}
+  myBody: {fileID: 54564392854017390}
+  effectName: Splode
   contactEffect: {fileID: 0}
 --- !u!135 &135085032454022544
 SphereCollider:

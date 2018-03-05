@@ -284,8 +284,7 @@ MonoBehaviour:
     hasTrail: 1
     accuracyModifier: 0
     contactSound: {fileID: 8300000, guid: c74d673ec97b683429f6a4d0714f0fe2, type: 3}
-    contactEffect: {fileID: 198000012777718758, guid: acf39d9f4addf294d93fa56fa373961b,
-      type: 2}
+    effectName: 
     material: {fileID: 2100000, guid: 31cf560cbedc5e34bbb821a94055e6b2, type: 2}
     name: Particle Cannon
     damage: 20
@@ -303,8 +302,7 @@ MonoBehaviour:
     hasTrail: 1
     accuracyModifier: 0
     contactSound: {fileID: 8300000, guid: a950dd5a78f174cf49cc308afcd87744, type: 3}
-    contactEffect: {fileID: 198000010585806678, guid: 96730f8640590934eacb6f860058e7f9,
-      type: 2}
+    effectName: Splode
     material: {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
     name: HE Cannon
     damage: 115

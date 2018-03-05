@@ -10,10 +10,11 @@ public class Bullet : MonoBehaviour {
     public float AOE = 0;
     public bool hasTrail = false;
     public AudioSource sfxSource;
-    public Renderer myRenderer;
-    public Rigidbody myBody;
+    public Renderer renderer;
+    public Rigidbody body;
     public Transform sourceObj;
-    //[HideInInspector]
+    public Collider collider;
+    [HideInInspector]
     public string effectName = "Splode";
 
     private TrailRenderer trailRenderer;
@@ -26,7 +27,8 @@ public class Bullet : MonoBehaviour {
     private void OnEnable()
     {
         alive = true;
-        myRenderer.enabled = true;
+        renderer.enabled = true;
+        collider.enabled = true;
         contactEffect = null;
         Transform effect = transform.Find(effectName + "(Clone)");
         if (effect != null)
@@ -55,7 +57,7 @@ public class Bullet : MonoBehaviour {
             Invoke("TrailOn", trailRenderer.time + 0.01f);
         }
 
-        myBody.velocity = transform.forward * speed;
+        body.velocity = transform.forward * speed;
     }
 
     void TrailOn()
@@ -69,13 +71,10 @@ public class Bullet : MonoBehaviour {
     }
 
     private void FixedUpdate () {
-        if(alive)
+        if(!alive)
         {
-            //transform.position += transform.forward * speed * Time.deltaTime;
-        }
-        else
-        {
-            if(contactEffect == null)
+            body.velocity = Vector3.zero;
+            if (contactEffect == null)
             {
                 gameObject.SetActive(false);
             }
@@ -157,12 +156,15 @@ public class Bullet : MonoBehaviour {
 
     private void Kill()
     {
+        body.velocity = Vector3.zero;
         alive = false;
         if (contactEffect != null)
         {
             contactEffect.gameObject.SetActive(true);
             contactEffect.Play();
         }
+        renderer.enabled = false;
+        collider.enabled = false;
         sfxSource.volume = 1f;
         sfxSource.mute = false;
         sfxSource.PlayOneShot(sfxSource.clip, 1f);

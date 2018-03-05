@@ -24,6 +24,7 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
     public float bulletSpeed = 50.0f;
     public float bulletDamage = 10.0f;
     public Vector2 shootPitchRange = new Vector2(0.9f, 1.1f);
+    public float laserBeamTime = 0.25f;
 
     public bool chaser = false;
 
@@ -38,10 +39,12 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
     public ParticleSystem explodeEffect;
     public GameObject explodeParts;
     public GameObject modelObj;
+    public LineRenderer lineRenderer;
 
     private float health;
     private bool alive = true;
     private float gunHeat = 0;
+    private float laserRunTime = 0;
     private Vector3 startPos;
     private Vector3 trgPos = Vector3.zero;
     private Vector3 trgLastPos = Vector3.zero;
@@ -63,16 +66,6 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
         
 		if(alive && gunHeat <= 0 && state == EnemyState.Attacking)
         {
-            //RaycastHit hit;
-            //if (gunHeat <= 0 && Physics.Raycast(transform.position, transform.forward, out hit))
-            //{
-            //    if (hit.transform.CompareTag("Player"))
-            //    {
-            //        Shoot();
-            //        gunHeat = gunCooldown;
-            //    }
-            //}
-
             Vector3 toPlayer = player.position - transform.position;
             float ang = Vector3.Angle(toPlayer, transform.forward);
             
@@ -86,6 +79,15 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
 
     void FixedUpdate()
     {
+        if(laserRunTime < laserBeamTime)
+        {
+            laserRunTime += Time.deltaTime;
+            if(laserRunTime >= laserBeamTime)
+            {
+                lineRenderer.enabled = false;
+            }
+        }
+
         if (alive)
         {
             if(chaser)
@@ -194,22 +196,24 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
     {
         audioSource.pitch = Random.Range(shootPitchRange.x, shootPitchRange.y);
         audioSource.PlayOneShot(shootSound);
-        GameObject b;
-        if(bulletPool)
+        
+        lineRenderer.SetPosition(0, transform.position);
+        lineRenderer.enabled = true;
+        laserRunTime = 0;
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, transform.forward, out hit))
         {
-            b = bulletPool.GetBullet();
-            b.SetActive(true);
+            lineRenderer.SetPosition(1, hit.point);
+            IDamagable dmg = hit.transform.GetComponent<IDamagable>();
+            if (dmg != null)
+            {
+                dmg.Damage(bulletDamage);
+            }
         }
         else
         {
-            b = Instantiate(bulletPrefab);
-            Debug.LogError("No bullet pool assigned!");
+            lineRenderer.SetPosition(1, transform.position + transform.forward * 1000);
         }
-        b.transform.position = transform.position + transform.forward * 2f;
-        b.transform.rotation = transform.rotation;
-        Bullet s = b.GetComponent<Bullet>();
-        s.speed = bulletSpeed;
-        s.damage = bulletDamage;
     }
 
 }

@@ -219,7 +219,7 @@ public class GunManager : MonoBehaviour
     void SwitchBullet(GameObject bulletObj)
     {
 
-        bulletObj.GetComponent<MeshRenderer>().material = bullet[weaponIndex].material;
+        //bulletObj.GetComponent<MeshRenderer>().material = bullet[weaponIndex].material;
         bulletObj.GetComponent<Bullet>().damage = bullet[weaponIndex].damage;
         bulletObj.GetComponent<Bullet>().speed = bullet[weaponIndex].speed;
         bulletObj.GetComponent<Bullet>().lifetime = bullet[weaponIndex].lifetime;

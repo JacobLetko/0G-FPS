@@ -210,6 +210,7 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
         Bullet s = b.GetComponent<Bullet>();
         s.speed = bulletSpeed;
         s.damage = bulletDamage;
+        s.sourceObj = transform;
     }
 
 }

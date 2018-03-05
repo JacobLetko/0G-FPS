@@ -9,11 +9,20 @@ public class Bullet : MonoBehaviour {
     public float lifetime = 2f;
     public float AOE = 0;
     public bool hasTrail = false;
-
+    public AudioSource sfxSource;
+    [HideInInspector]
+    public ParticleSystem contactEffect;
     TrailRenderer render;
 
     private void OnEnable()
     {
+
+        if (sfxSource == null)
+        {
+            sfxSource = GetComponent<AudioSource>();
+            sfxSource.volume = 0f;
+        }
+
         if (render == null)
         {
             render = GetComponent<TrailRenderer>();
@@ -25,8 +34,6 @@ public class Bullet : MonoBehaviour {
         {
             Invoke("TrailOn", render.time + 0.01f);
         }
-        
-
     }
 
     void TrailOn()
@@ -91,11 +98,16 @@ public class Bullet : MonoBehaviour {
 
     private void DeactivateInvoke()
     {
+        contactEffect.Play();
+        sfxSource.volume = 1f;
+        sfxSource.mute = false;
+        sfxSource.PlayOneShot(sfxSource.clip, 1f);
         gameObject.SetActive(false);
     }
 
     private void AreaOfEffect()
     {
+
         //Debug.Log("Booom!");
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, AOE);//Physics.OverlapSphere(Explosion Source,Explosion radius)
         foreach (Collider other in hitColliders)

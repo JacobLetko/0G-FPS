@@ -10,12 +10,32 @@ public class Bullet : MonoBehaviour {
     public float AOE = 0;
     public bool hasTrail = false;
     public AudioSource sfxSource;
-    [HideInInspector]
-    public ParticleSystem contactEffect;
-    TrailRenderer render;
+    public Renderer myRenderer;
+    public Rigidbody myBody;
+    public Transform sourceObj;
+    //[HideInInspector]
+    public string effectName = "Splode";
+
+    private TrailRenderer trailRenderer;
+    private ParticleSystem contactEffect;
+
+    private bool alive = false;
+
+
 
     private void OnEnable()
     {
+        alive = true;
+        myRenderer.enabled = true;
+        contactEffect = null;
+        Transform effect = transform.Find(effectName + "(Clone)");
+        if (effect != null)
+        {
+            contactEffect = effect.GetComponent<ParticleSystem>();
+            contactEffect.Stop();
+            contactEffect.gameObject.SetActive(false);
+        }
+        
 
         if (sfxSource == null)
         {
@@ -23,86 +43,129 @@ public class Bullet : MonoBehaviour {
             sfxSource.volume = 0f;
         }
 
-        if (render == null)
+        if (trailRenderer == null)
         {
-            render = GetComponent<TrailRenderer>();
+            trailRenderer = GetComponent<TrailRenderer>();
         }
 
-        render.enabled = false;
-        Invoke("DeactivateInvoke", lifetime);
+        trailRenderer.enabled = false;
+        Invoke("Kill", lifetime);
         if (hasTrail)
         {
-            Invoke("TrailOn", render.time + 0.01f);
+            Invoke("TrailOn", trailRenderer.time + 0.01f);
         }
+
+        myBody.velocity = transform.forward * speed;
     }
 
     void TrailOn()
     {       
-        render.enabled = true;
+        trailRenderer.enabled = true;
+    }
+
+    public bool IsAlive()
+    {
+        return alive;
     }
 
     private void FixedUpdate () {
-        transform.position += transform.forward * speed * Time.deltaTime;
+        if(alive)
+        {
+            //transform.position += transform.forward * speed * Time.deltaTime;
+        }
+        else
+        {
+            if(contactEffect == null)
+            {
+                gameObject.SetActive(false);
+            }
+            else if(!contactEffect.IsAlive())
+            {
+                contactEffect.gameObject.SetActive(false);
+                gameObject.SetActive(false);
+            }
+        }
 	}
 
     private void OnTriggerEnter(Collider other)
     {
-        IDamagable damagable = other.GetComponent<IDamagable>();
-        if (damagable != null)
+        if(alive && other.transform != sourceObj)
         {
-            if (AOE != 0)
+            IDamagable damagable = other.GetComponent<IDamagable>();
+            if (damagable != null)
             {
-                AreaOfEffect();
+                if (AOE != 0)
+                {
+                    AreaOfEffect();
+                }
+                else
+                {
+                    damagable.Damage(damage);
+                }
             }
             else
             {
-                damagable.Damage(damage);
+                if (AOE != 0)
+                {
+                    AreaOfEffect();
+                }
             }
-
+            CancelInvoke();
+            Kill();
         }
-        else
-        {
-            if (AOE != 0)
-            {
-                AreaOfEffect();
-            }
-        }
-        CancelInvoke();
-        gameObject.SetActive(false);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        IDamagable damagable = collision.gameObject.GetComponent<IDamagable>();
-        if (damagable != null)
-        {
-            if (AOE != 0)
-            {
-                AreaOfEffect();
-            }
-            else
-            {
-                damagable.Damage(damage);
-            }
-        }
-        else
-        {
-            if (AOE != 0)
-            {
-                AreaOfEffect();
-            }
-        }
-        CancelInvoke();
-        gameObject.SetActive(false);
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    IDamagable damagable = collision.gameObject.GetComponent<IDamagable>();
+    //    if (damagable != null)
+    //    {
+    //        if (AOE != 0)
+    //        {
+    //            AreaOfEffect();
+    //        }
+    //        else
+    //        {
+    //            damagable.Damage(damage);
+    //        }
+    //    }
+    //    else
+    //    {
+    //        if (AOE != 0)
+    //        {
+    //            AreaOfEffect();
+    //        }
+    //    }
+    //    CancelInvoke();
+    //    gameObject.SetActive(false);
+    //}
 
-    private void DeactivateInvoke()
+    //private void DeactivateInvoke()
+    //{
+    //    //Kill();
+    //    //alive = false;
+    //    //if(contactEffect != null)
+    //    //{
+    //    //    contactEffect.gameObject.SetActive(true);
+    //    //    contactEffect.Play();
+    //    //}
+    //    //sfxSource.volume = 1f;
+    //    //sfxSource.mute = false;
+    //    //sfxSource.PlayOneShot(sfxSource.clip, 1f);
+    //    //gameObject.SetActive(false);
+    //}
+
+    private void Kill()
     {
-        contactEffect.Play();
+        alive = false;
+        if (contactEffect != null)
+        {
+            contactEffect.gameObject.SetActive(true);
+            contactEffect.Play();
+        }
         sfxSource.volume = 1f;
         sfxSource.mute = false;
         sfxSource.PlayOneShot(sfxSource.clip, 1f);
-        gameObject.SetActive(false);
     }
 
     private void AreaOfEffect()

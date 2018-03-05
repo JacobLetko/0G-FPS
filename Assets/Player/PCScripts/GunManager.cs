@@ -64,6 +64,7 @@ public class GunManager : MonoBehaviour
         timer = bullet[weaponIndex].fireRate;
         currentAmmo = bullet[weaponIndex].ammo;
         infiniteAmmo = bullet[weaponIndex].infinite;
+
         //set default bullet settings here
 
 
@@ -72,6 +73,8 @@ public class GunManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
         currentAmmo = bullet[weaponIndex].ammo;
         timer += Time.deltaTime;
         //Input controls here
@@ -148,11 +151,14 @@ public class GunManager : MonoBehaviour
 
 
                         SwitchBullet(bul);
+
                         bul.transform.position = transform.position;
                         bul.transform.rotation = transform.rotation;
                         bul.transform.Rotate(new Vector3(Random.Range(bullet[weaponIndex].accuracyModifier, -bullet[weaponIndex].accuracyModifier),
                                                          Random.Range(bullet[weaponIndex].accuracyModifier, -bullet[weaponIndex].accuracyModifier),
                                                          Random.Range(bullet[weaponIndex].accuracyModifier, -bullet[weaponIndex].accuracyModifier)));
+                        bul.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+
                         bul.SetActive(true);
                         if (bullet[weaponIndex].loop)
                         {
@@ -218,7 +224,11 @@ public class GunManager : MonoBehaviour
         bulletObj.GetComponent<Bullet>().lifetime = bullet[weaponIndex].lifetime;
         bulletObj.GetComponent<Bullet>().AOE = bullet[weaponIndex].splashRadius;
         bulletObj.GetComponent<Bullet>().hasTrail = bullet[weaponIndex].hasTrail;
-        
+        bulletObj.GetComponent<Bullet>().contactEffect = bullet[weaponIndex].contactEffect;
+        Debug.Log(bulletObj.GetComponent<Bullet>().contactEffect);
+        bulletObj.GetComponent<Bullet>().sfxSource.mute = true;
+        bulletObj.GetComponent<Bullet>().sfxSource.clip = bullet[weaponIndex].contactSound;
+
 
     }
 
@@ -343,7 +353,7 @@ public class GunManager : MonoBehaviour
 
     private void AreaOfEffect_Beam(Vector3 pos1, float AOE)
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, AOE);//Physics.OverlapSphere(Explosion Source,Explosion radius)
+        Collider[] hitColliders = Physics.OverlapSphere(pos1, AOE);//Physics.OverlapSphere(Explosion Source,Explosion radius)
         foreach (Collider other in hitColliders)
         {
             if (other != null)
@@ -352,7 +362,7 @@ public class GunManager : MonoBehaviour
                 {
                     if (other.tag != "Player")
                     {
-                        float dist = (other.transform.position - transform.position).magnitude;
+                        float dist = (other.transform.position - pos1).magnitude;
 
                         IDamagable damagable = other.GetComponent<IDamagable>();
                         if (damagable != null)
@@ -360,7 +370,7 @@ public class GunManager : MonoBehaviour
                             damagable.Damage(bullet[weaponIndex].damage * (1.0f - (dist / AOE)));
                         }
 
-                        other.GetComponent<Rigidbody>().AddExplosionForce(bullet[weaponIndex].damage * 2, transform.position, AOE);
+                        other.GetComponent<Rigidbody>().AddExplosionForce(bullet[weaponIndex].damage * 2, pos1, AOE);
                     }
                 }
             }

@@ -42,6 +42,7 @@ public class PlayerCam : MonoBehaviour
     {
         camT = Camera.main.transform;
         camT.transform.position = transform.position + new Vector3(0,0.1f,0);
+        camT.rotation = transform.rotation;
         myRig = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         normalDrag = myRig.drag;

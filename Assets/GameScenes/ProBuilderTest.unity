@@ -189,12 +189,17 @@ Prefab:
     - target: {fileID: 114409172617818008, guid: 0b8e3806ccbd6da41b9c01712f63c0d9,
         type: 2}
       propertyPath: bullet.Array.data[1].ammo
-      value: 57681
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114409172617818008, guid: 0b8e3806ccbd6da41b9c01712f63c0d9,
         type: 2}
       propertyPath: bullet.Array.data[0].damage
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 82368770990451522, guid: 0b8e3806ccbd6da41b9c01712f63c0d9,
+        type: 2}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0b8e3806ccbd6da41b9c01712f63c0d9, type: 2}
@@ -7853,7 +7858,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 2
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.6, b: 0, a: 1}
   m_Intensity: 1
   m_Range: 50
   m_SpotAngle: 30

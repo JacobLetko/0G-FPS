@@ -5002,6 +5002,8 @@ MonoBehaviour:
   explodeEffect: {fileID: 1305601694}
   explodeParts: {fileID: 179692928}
   modelObj: {fileID: 0}
+  laserLight: {fileID: 0}
+  gunLight: {fileID: 0}
   lineRenderer: {fileID: 0}
 --- !u!23 &421998988
 MeshRenderer:
@@ -14435,6 +14437,11 @@ Prefab:
       propertyPath: bulletPool
       value: 
       objectReference: {fileID: 347872150}
+    - target: {fileID: 82924018669715166, guid: e23f73121b6f939459bb6f869204d93f,
+        type: 2}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e23f73121b6f939459bb6f869204d93f, type: 2}
   m_IsPrefabParent: 0

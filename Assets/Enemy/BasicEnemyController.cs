@@ -39,6 +39,8 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
     public ParticleSystem explodeEffect;
     public GameObject explodeParts;
     public GameObject modelObj;
+    public GameObject laserLight;
+    public GameObject gunLight;
     public LineRenderer lineRenderer;
 
     private float health;
@@ -84,6 +86,8 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
             laserRunTime += Time.deltaTime;
             if(laserRunTime >= laserBeamTime)
             {
+                laserLight.SetActive(false);
+                gunLight.SetActive(false);
                 lineRenderer.enabled = false;
             }
         }
@@ -203,6 +207,9 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
         RaycastHit hit;
         if(Physics.Raycast(transform.position, transform.forward, out hit))
         {
+            laserLight.transform.position = hit.point - (transform.forward * 0.5f);
+            laserLight.SetActive(true);
+            gunLight.SetActive(true);
             lineRenderer.SetPosition(1, hit.point);
             IDamagable dmg = hit.transform.GetComponent<IDamagable>();
             if (dmg != null)
@@ -212,6 +219,8 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
         }
         else
         {
+            laserLight.SetActive(false);
+            gunLight.SetActive(false);
             lineRenderer.SetPosition(1, transform.position + transform.forward * 1000);
         }
     }

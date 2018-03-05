@@ -1248,16 +1248,6 @@ Prefab:
       propertyPath: bulletPool
       value: 
       objectReference: {fileID: 2005467198}
-    - target: {fileID: 114409172617818008, guid: 0b8e3806ccbd6da41b9c01712f63c0d9,
-        type: 2}
-      propertyPath: bullet.Array.data[1].contactSound
-      value: 
-      objectReference: {fileID: 8300000, guid: a950dd5a78f174cf49cc308afcd87744, type: 3}
-    - target: {fileID: 114409172617818008, guid: 0b8e3806ccbd6da41b9c01712f63c0d9,
-        type: 2}
-      propertyPath: bullet.Array.data[0].contactSound
-      value: 
-      objectReference: {fileID: 8300000, guid: c74d673ec97b683429f6a4d0714f0fe2, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0b8e3806ccbd6da41b9c01712f63c0d9, type: 2}
   m_IsPrefabParent: 0

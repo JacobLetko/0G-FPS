@@ -6,10 +6,11 @@ public class LoadSceneOnClick : MonoBehaviour
 {
     public void LoadByName(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        Time.timeScale = 1;
         if (sceneName != "Win")
         {
             HighScore.resetScore();
         }
+        SceneManager.LoadScene(sceneName);
     }
 }

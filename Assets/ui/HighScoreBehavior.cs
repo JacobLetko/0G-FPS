@@ -2,14 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class HighScoreBehavior : MonoBehaviour {
 
     public Text scoretext;
-
-    Scene activescene;
-    string sceneName;
 
     public void display()
     {
@@ -33,8 +29,11 @@ public class HighScoreBehavior : MonoBehaviour {
 
     public void addName(Text name)
     {
-        Debug.Log("OOOOIIIIIII");
         HighScore.playerName = name.text.ToString();
+        if(HighScore.playerName == "")
+        {
+            HighScore.playerName = "Player";
+        }
         HighScore.save();
     }
 
@@ -42,15 +41,13 @@ public class HighScoreBehavior : MonoBehaviour {
     {
         HighScore.sort();
     }
-
-    public void Update()
+    public void ResetScores()
     {
-        activescene = SceneManager.GetActiveScene();
-        sceneName = activescene.name;
+        HighScore.clear();
+    }
 
-        if(sceneName == "Win")
-        {
-            display();
-        }
+    public void Awake()
+    {
+        display();
     }
 }

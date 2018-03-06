@@ -33,7 +33,7 @@ public class GunItem
 
     public AudioClip contactSound;
 
-    public ParticleSystem contactEffect;
+    public string effectName;
 
     public Material material;
 

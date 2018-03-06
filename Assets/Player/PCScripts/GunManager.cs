@@ -218,14 +218,16 @@ public class GunManager : MonoBehaviour
 
     void SwitchBullet(GameObject bulletObj)
     {
-        bulletObj.GetComponent<MeshRenderer>().material = bullet[weaponIndex].material;
+
+        //bulletObj.GetComponent<MeshRenderer>().material = bullet[weaponIndex].material;
         bulletObj.GetComponent<Bullet>().damage = bullet[weaponIndex].damage;
         bulletObj.GetComponent<Bullet>().speed = bullet[weaponIndex].speed;
         bulletObj.GetComponent<Bullet>().lifetime = bullet[weaponIndex].lifetime;
         bulletObj.GetComponent<Bullet>().AOE = bullet[weaponIndex].splashRadius;
         bulletObj.GetComponent<Bullet>().hasTrail = bullet[weaponIndex].hasTrail;
-        bulletObj.GetComponent<Bullet>().contactEffect = bullet[weaponIndex].contactEffect;
-        Debug.Log(bulletObj.GetComponent<Bullet>().contactEffect);
+        bulletObj.GetComponent<Bullet>().sourceObj = transform;
+        bulletObj.GetComponent<Bullet>().effectName = bullet[weaponIndex].effectName;
+        Debug.Log(bulletObj.GetComponent<Bullet>().effectName);
         bulletObj.GetComponent<Bullet>().sfxSource.mute = true;
         bulletObj.GetComponent<Bullet>().sfxSource.clip = bullet[weaponIndex].contactSound;
 

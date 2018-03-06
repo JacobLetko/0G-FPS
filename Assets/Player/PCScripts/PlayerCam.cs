@@ -11,6 +11,8 @@ public class PlayerCam : MonoBehaviour
 
     public float HardSpeedLimmit = 30;//in meters per second
 
+    public float thirdPersonCameraDist = 5.0f;
+
     [Range(0, 100)]
     public float mouseSensX = 3.5f;//Sensativity x
     [Range(0, 100)]
@@ -47,6 +49,7 @@ public class PlayerCam : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         normalDrag = myRig.drag;
         normalAngularDrag = myRig.angularDrag;
+
     }
 
 
@@ -91,7 +94,15 @@ public class PlayerCam : MonoBehaviour
         myRig.AddRelativeTorque(Vector3.left * Input.GetAxis("Mouse Y") * mouseSensY);
 
 
-
+        if (Input.GetKey("x"))
+        {
+            ThirdPerson();
+        }
+        else
+        {
+            camT.transform.position = transform.position + new Vector3(0, 0.1f, 0);
+            camT.rotation = transform.rotation;
+        }
 
 
 
@@ -181,5 +192,19 @@ public class PlayerCam : MonoBehaviour
 
 
 
+    }
+
+
+    private void ThirdPerson()
+    {
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, -transform.forward, out hit, thirdPersonCameraDist))
+        {
+            camT.transform.position = hit.point;
+        }
+        else
+        {
+            camT.transform.position = transform.position - transform.forward * thirdPersonCameraDist;
+        }
     }
 }

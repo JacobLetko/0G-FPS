@@ -148,10 +148,11 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
             
 
             RaycastHit hit;
+            int layerMask = LayerMask.GetMask("PathfindingObstacle", "Player");
             Vector3 targetOffset = player.position - transform.position;
             float  angleToPlayer = Vector3.Angle(targetOffset, transform.forward);
             
-            if (Physics.Raycast(transform.position, targetOffset, out hit))
+            if (Physics.Raycast(transform.position, targetOffset, out hit, 10000.0f, layerMask))
             {
                 if (hit.transform.tag == "Player")
                 {
@@ -291,23 +292,26 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
 
     private void Shoot()
     {
-        audioSource.pitch = Random.Range(shootPitchRange.x, shootPitchRange.y);
-        audioSource.PlayOneShot(shootSound);
-        
-        lineRenderer.SetPosition(0, transform.position);
-        lineRenderer.enabled = true;
-        laserRunTime = 0;
         RaycastHit hit;
-        if(Physics.Raycast(transform.position, transform.forward, out hit))
+        if (Physics.Raycast(transform.position, transform.forward, out hit)
+         && hit.transform.gameObject.tag != "Enemy")
         {
-            laserLight.transform.position = hit.point - (transform.forward * 0.5f);
-            laserLight.SetActive(true);
-            gunLight.SetActive(true);
-            lineRenderer.SetPosition(1, hit.point);
-            IDamagable dmg = hit.transform.GetComponent<IDamagable>();
-            if (dmg != null)
+            audioSource.pitch = Random.Range(shootPitchRange.x, shootPitchRange.y);
+            audioSource.PlayOneShot(shootSound);
+
+            lineRenderer.SetPosition(0, transform.position);
+            lineRenderer.enabled = true;
+            laserRunTime = 0;
             {
-                dmg.Damage(bulletDamage);
+                laserLight.transform.position = hit.point - (transform.forward * 0.5f);
+                laserLight.SetActive(true);
+                gunLight.SetActive(true);
+                lineRenderer.SetPosition(1, hit.point);
+                IDamagable dmg = hit.transform.GetComponent<IDamagable>();
+                if (dmg != null)
+                {
+                    dmg.Damage(bulletDamage);
+                }
             }
         }
         else

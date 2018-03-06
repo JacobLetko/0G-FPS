@@ -311,7 +311,7 @@ GameObject:
   - component: {fileID: 120079793645098230}
   m_Layer: 0
   m_Name: BasicEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1348,7 +1348,7 @@ MonoBehaviour:
   wobbleRange: 2
   wobbleForce: 50
   wobbleReachDist: 0.5
-  pathForce: 100
+  pathForce: 200
   pathReachDist: 0.5
   bulletSpeed: 50
   bulletDamage: 10

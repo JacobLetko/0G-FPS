@@ -59,12 +59,11 @@ public static class HighScore
         }
         scores = tempS;
         names = tempN;
+        save();
     }
-
     public static void save()
     {
         Debug.Log("start save");
-        sort();
         BinaryFormatter bf = new BinaryFormatter();
         
         //scores
@@ -100,21 +99,6 @@ public static class HighScore
     }
     public static void clear()
     {
-        BinaryFormatter bf = new BinaryFormatter();
-
-        if (File.Exists(Application.persistentDataPath + "/Scores.gd"))
-        {
-            FileStream file = File.Open(Application.persistentDataPath + "/Scores.gd", FileMode.Open);
-            File.Delete(Application.persistentDataPath + "/Scores.gd");
-            file.Close();
-        }
-        if (File.Exists(Application.persistentDataPath + "/Names.gd"))
-        {
-            FileStream file = File.Open(Application.persistentDataPath + "/Names.gd", FileMode.Open);
-            File.Delete(Application.persistentDataPath + "/Scores.gd");
-            file.Close();
-        }
-
         for(int i = 0; i < 10; i++)
         {
             scores[i] = 0;

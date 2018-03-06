@@ -2,15 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class HighScoreBehavior : MonoBehaviour {
 
     public Text scoretext;
-
-    Scene activescene;
-    string sceneName;
-    bool updated = false;
 
     public void display()
     {
@@ -51,15 +46,8 @@ public class HighScoreBehavior : MonoBehaviour {
         HighScore.clear();
     }
 
-    public void Update()
+    public void Awake()
     {
-        activescene = SceneManager.GetActiveScene();
-        sceneName = activescene.name;
-
-        if(sceneName == "Win" && updated == false)
-        {
-            updated = true;
-            display();
-        }
+        display();
     }
 }

@@ -10,6 +10,7 @@ public class HighScoreBehavior : MonoBehaviour {
 
     Scene activescene;
     string sceneName;
+    bool updated = false;
 
     public void display()
     {
@@ -33,8 +34,11 @@ public class HighScoreBehavior : MonoBehaviour {
 
     public void addName(Text name)
     {
-        Debug.Log("OOOOIIIIIII");
         HighScore.playerName = name.text.ToString();
+        if(HighScore.playerName == "")
+        {
+            HighScore.playerName = "Player";
+        }
         HighScore.save();
     }
 
@@ -42,14 +46,19 @@ public class HighScoreBehavior : MonoBehaviour {
     {
         HighScore.sort();
     }
+    public void ResetScores()
+    {
+        HighScore.clear();
+    }
 
     public void Update()
     {
         activescene = SceneManager.GetActiveScene();
         sceneName = activescene.name;
 
-        if(sceneName == "Win")
+        if(sceneName == "Win" && updated == false)
         {
+            updated = true;
             display();
         }
     }

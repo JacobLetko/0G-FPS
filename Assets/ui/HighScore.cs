@@ -23,7 +23,7 @@ public static class HighScore
         //Loop through the capacity, (This is what data we already have)
 
         //Loop through the remaining and add new data
-
+        Debug.Log("start sort");
         load();
 
         int[] tempS = new int[10];
@@ -63,6 +63,7 @@ public static class HighScore
 
     public static void save()
     {
+        Debug.Log("start save");
         sort();
         BinaryFormatter bf = new BinaryFormatter();
         
@@ -75,9 +76,11 @@ public static class HighScore
         FileStream file2 = File.Create(Application.persistentDataPath + "/Names.gd");
         bf.Serialize(file2, HighScore.names);
         file2.Close();
+        Debug.Log("saved");
     }
     public static void load()
     {
+        Debug.Log("start load");
         BinaryFormatter bf = new BinaryFormatter();
         
         //scores
@@ -93,6 +96,32 @@ public static class HighScore
             HighScore.names = (string[])bf.Deserialize(file);
             file.Close();
         }
+        Debug.Log("loaded");
+    }
+    public static void clear()
+    {
+        BinaryFormatter bf = new BinaryFormatter();
+
+        if (File.Exists(Application.persistentDataPath + "/Scores.gd"))
+        {
+            FileStream file = File.Open(Application.persistentDataPath + "/Scores.gd", FileMode.Open);
+            File.Delete(Application.persistentDataPath + "/Scores.gd");
+            file.Close();
+        }
+        if (File.Exists(Application.persistentDataPath + "/Names.gd"))
+        {
+            FileStream file = File.Open(Application.persistentDataPath + "/Names.gd", FileMode.Open);
+            File.Delete(Application.persistentDataPath + "/Scores.gd");
+            file.Close();
+        }
+
+        for(int i = 0; i < 10; i++)
+        {
+            scores[i] = 0;
+            names[i] = "player";
+        }
+        save();
+        Debug.Log("clear");
     }
 
     public static void resetScore()

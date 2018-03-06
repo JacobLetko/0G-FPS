@@ -20,6 +20,8 @@ public class HUD : MonoBehaviour
 
     private void Update()
     {
+        // gunmanager weponindex
+        int x = gun.weaponIndex; 
         ammo = gun.currentAmmo;
         healthbar.value = calchealth();
         score.display();

@@ -13,6 +13,9 @@ public class HUD : MonoBehaviour
     public HighScoreBehavior score;
     public Text ammoAmount;
 
+    public Image laser;
+    public Image missle;
+
     public void Start()
     {
         health = player.GetHealth();
@@ -20,18 +23,20 @@ public class HUD : MonoBehaviour
 
     private void Update()
     {
-        // gunmanager weponindex
-        int x = gun.weaponIndex; 
         ammo = gun.currentAmmo;
         healthbar.value = calchealth();
         score.display();
         if (gun.infiniteAmmo == true)
         {
             ammoAmount.text = "Ammo: INF";
+            laser.enabled = true;
+            missle.enabled = false;
         }
         else
         {
             ammoAmount.text = "Ammo: " + ammo;
+            laser.enabled = false;
+            missle.enabled = true;
         }
     }
 

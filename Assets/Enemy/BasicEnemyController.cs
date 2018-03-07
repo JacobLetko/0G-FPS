@@ -49,6 +49,7 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
     public GameObject laserLight;
     public GameObject gunLight;
     public LineRenderer lineRenderer;
+    public GameObject[] damageEffects;
 
     private float health;
     private bool alive = true;
@@ -270,6 +271,19 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
         if(alive)
         {
             health = Mathf.Clamp(health - amt, 0.0f, maxHealth);
+
+            if(damageEffects.Length > 0)
+            {
+                float dmgLvl = maxHealth / damageEffects.Length;
+                for (int i = 0; i < damageEffects.Length; ++i)
+                {
+                    if (health <= (i + 1) * dmgLvl)
+                    {
+                        damageEffects[i].SetActive(true);
+                    }
+                }
+            }
+
             if (health <= 0)
             {
                 Kill();
@@ -292,6 +306,11 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
         HighScore.addPoints(killScore);
         
         explodeParts.SetActive(true);
+
+        foreach(GameObject g in damageEffects)
+        {
+            g.SetActive(false);
+        }
 
         GetComponent<Collider>().enabled = false;
         modelObj.GetComponent<Renderer>().enabled = false;

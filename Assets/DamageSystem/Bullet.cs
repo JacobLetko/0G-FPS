@@ -111,6 +111,8 @@ public class Bullet : MonoBehaviour {
             }
             CancelInvoke();
             Kill();
+
+            
         }
     }
 

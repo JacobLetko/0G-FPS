@@ -5,14 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class winLoss : MonoBehaviour {
 
-    public ReactorController reactor;
+    public GameObject goalObj;
     public PlayerStats player;
     private bool invoking;
+    private IDamagable goal;
 
-	// Update is called once per frame
-	void Update ()
+
+    private void Start()
     {
-	    if(reactor.GetHealth() <= 0)
+        goal = goalObj.GetComponent<IDamagable>();
+    }
+
+    // Update is called once per frame
+    void Update ()
+    {
+	    if(goal.GetHealth() <= 0)
         {
             if (invoking == false)
             {

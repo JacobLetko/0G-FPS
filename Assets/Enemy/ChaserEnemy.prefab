@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 120335222174598068}
   m_Layer: 0
   m_Name: ChaserEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1360,6 +1360,8 @@ MonoBehaviour:
   wobbleRange: 2
   wobbleForce: 200
   wobbleReachDist: 0.5
+  pathForce: 200
+  pathReachDist: 1
   bulletSpeed: 50
   bulletDamage: 5
   shootPitchRange: {x: 0.9, y: 1.3}
@@ -1371,6 +1373,7 @@ MonoBehaviour:
   player: {fileID: 0}
   audioSource: {fileID: 82626467859566068}
   bulletPool: {fileID: 0}
+  graphManager: {fileID: 0}
   bulletPrefab: {fileID: 1151126990084618, guid: 83710c0df0f5db24d87e7663d1f9b953,
     type: 2}
   explodeEffect: {fileID: 198771194656089396}

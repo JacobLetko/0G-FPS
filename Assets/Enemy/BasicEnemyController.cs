@@ -40,6 +40,7 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
     public Transform player;
     public AudioSource audioSource;
     public BulletPool bulletPool;
+    public LaserEffectPool laserEffectPool;
     public NodeGraphManager graphManager;
     public GameObject bulletPrefab;
     public ParticleSystem explodeEffect;
@@ -304,6 +305,14 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
         {
             audioSource.pitch = Random.Range(shootPitchRange.x, shootPitchRange.y);
             audioSource.PlayOneShot(shootSound);
+
+            if(laserEffectPool != null)
+            {
+                GameObject sparks = laserEffectPool.GetLaserEffectObject();
+                sparks.GetComponent<LaserEffectItem>().effectName = "ElectricalSparksEffect";
+                sparks.transform.position = hit.point;
+                sparks.SetActive(true);
+            }
 
             lineRenderer.SetPosition(0, transform.position);
             lineRenderer.enabled = true;

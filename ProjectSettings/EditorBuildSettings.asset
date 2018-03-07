@@ -15,11 +15,11 @@ EditorBuildSettings:
     path: Assets/ui/PauseMenu.unity
     guid: cfcc92dcf119dbe48b86c0762f24f7ba
   - enabled: 1
-    path: Assets/ui/GameOver.unity
-    guid: 31dc810e92030a241b96131ff76a6067
-  - enabled: 1
     path: Assets/ui/Win.unity
     guid: 9ec984ab88ffb6147ba6ff41b4da99e2
   - enabled: 1
     path: Assets/GameScenes/ProBuilderTest.unity
     guid: c64db85745a2f8241857ec0ccca9a0dc
+  - enabled: 1
+    path: Assets/ui/GameOver.unity
+    guid: fe420c577ba2aaa48acada9717ee197d

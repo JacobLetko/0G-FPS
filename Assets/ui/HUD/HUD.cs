@@ -13,12 +13,18 @@ public class HUD : MonoBehaviour
     public HighScoreBehavior score;
     public Text ammoAmount;
 
-    public Image laser;
-    public Image missle;
+    public GameObject laser;
+    public GameObject missle;
+
+    private bool hit;
+    public GameObject bars;
+    private float prevHealth;
 
     public void Start()
     {
         health = player.GetHealth();
+        prevHealth = health;
+        hit = false;
     }
 
     private void Update()
@@ -29,20 +35,51 @@ public class HUD : MonoBehaviour
         if (gun.infiniteAmmo == true)
         {
             ammoAmount.text = "Ammo: INF";
-            laser.enabled = true;
-            missle.enabled = false;
+            laser.SetActive(true);
+            missle.SetActive(false);
         }
         else
         {
             ammoAmount.text = "Ammo: " + ammo;
-            laser.enabled = false;
-            missle.enabled = true;
+            laser.SetActive(false);
+            missle.SetActive(true);
+        }
+
+        if(hit == true)
+        {
+            //opacity = .5
+            Image[] images = bars.GetComponentsInChildren<Image>();
+            foreach (Image img in images)
+            {
+                //img.material.color.a -= .05f;
+                var imgChange = img.color;
+                imgChange.a = .5f;
+                img.color = imgChange;
+            }
+            hit = false;
+        }
+        else
+        {
+            Image[] images = bars.GetComponentsInChildren<Image>();
+            foreach(Image img in images)
+            {
+                //img.material.color.a -= .05f;
+                var imgChange = img.color;
+                imgChange.a -= .05f;
+                img.color = imgChange;
+            }
+            //Debug.Log(bars.GetComponent<Renderer>().material.color);
+            //opacity -= .05
         }
     }
 
     float calchealth()
     {
+        if (player.GetHealth() < prevHealth)
+        {
+            hit = true;
+        }
+        prevHealth = player.GetHealth();
         return player.GetHealth() / health;
-
     }
 }

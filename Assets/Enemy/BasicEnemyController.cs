@@ -117,7 +117,6 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
                 {
                     body.AddForce(-body.velocity * body.mass, ForceMode.Impulse);
                     trgPos = Vector3.zero;
-
                     state = EnemyState.Idle;
                 }
             }
@@ -128,15 +127,12 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
                 {
                     nodePath = graphManager.MakePath(transform.position, player.position);
                     nodePath.RemoveAt(0);
-
-                    body.AddForce(-body.velocity * body.mass, ForceMode.Impulse);
-                    trgPos = Vector3.zero;
+                    
                     if (nodePath.Count > 0)
                     {
                         trgPos = nodePath[0];
                         nodePath.RemoveAt(0);
-                        Vector3 trgDir = trgPos - transform.position;
-                        body.AddForce(trgDir.normalized * pathForce);
+                        GoToTarg(pathForce);
                     }
                     else
                     {
@@ -158,7 +154,6 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
                 {
                     if(state != EnemyState.Attacking)
                     {
-                        body.AddForce(-body.velocity * body.mass, ForceMode.Impulse);
                         trgPos = Vector3.zero;
                     }
                     state = EnemyState.Attacking;
@@ -178,9 +173,7 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
                         trgPos = new Vector3(startPos.x + Random.Range(-wobbleRange, wobbleRange),
                                              startPos.y + Random.Range(-wobbleRange, wobbleRange),
                                              startPos.z + Random.Range(-wobbleRange, wobbleRange));
-
-                        Vector3 trgDir = trgPos - transform.position;
-                        body.AddForce(trgDir.normalized * wobbleForce);
+                        GoToTarg(wobbleForce);
                     }
                 }
                 else
@@ -208,17 +201,14 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
                         {
                             trgPos = trgLastPos;
                         }
-
-                        body.AddForce(-body.velocity * body.mass, ForceMode.Impulse);
+                        
                         if (state == EnemyState.Chasing)
                         {
-                            Vector3 trgDir = trgPos - transform.position;
-                            body.AddForce(trgDir.normalized * wobbleForce);
+                            GoToTarg(wobbleForce);
                         }
                         else if(state == EnemyState.Pathing)
                         {
-                            Vector3 trgDir = trgPos - transform.position;
-                            body.AddForce(trgDir.normalized * pathForce);
+                            GoToTarg(pathForce);
                         }
                     }
                 }
@@ -234,29 +224,31 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
 
     private void OnCollisionEnter(Collision collision)
     {
-        body.AddForce(-body.velocity * body.mass, ForceMode.Impulse);
         if (state == EnemyState.Chasing)
         {
-            Vector3 trgDir = trgPos - transform.position;
-            body.AddForce(trgDir.normalized * wobbleForce);
+            GoToTarg(wobbleForce);
         }
         else if (state == EnemyState.Pathing)
         {
-            Vector3 trgDir = trgPos - transform.position;
-            body.AddForce(trgDir.normalized * pathForce);
+            GoToTarg(pathForce);
         }
         else if(state == EnemyState.Attacking)
         {
             trgPos = new Vector3(startPos.x + Random.Range(-wobbleRange, wobbleRange),
                                              startPos.y + Random.Range(-wobbleRange, wobbleRange),
                                              startPos.z + Random.Range(-wobbleRange, wobbleRange));
-
-            Vector3 trgDir = trgPos - transform.position;
-            body.AddForce(trgDir.normalized * wobbleForce);
+            GoToTarg(wobbleForce);
         }
     }
 
 
+
+    public void GoToTarg(float force)
+    {
+        body.AddForce(-body.velocity * body.mass, ForceMode.Impulse);
+        Vector3 trgDir = trgPos - transform.position;
+        body.AddForce(trgDir.normalized * force);
+    }
 
     public void Damage(float amt)
     {

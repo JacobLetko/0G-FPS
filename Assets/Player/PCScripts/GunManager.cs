@@ -7,11 +7,21 @@ public class GunManager : MonoBehaviour
 {
 
     //Place script on Player
+
+    
+    
     public LineRenderer LineRend;
 
     public GunItem[] bullet;
 
+
+    //public Light playerGunLight;
+
+
+
+    public GameObject laserEffectPool;
     public GameObject bulletPool;
+
 
     public AudioSource playerSourceAudio;
 
@@ -37,7 +47,6 @@ public class GunManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
 
         LineRend = GetComponent<LineRenderer>();
 
@@ -189,7 +198,26 @@ public class GunManager : MonoBehaviour
                     {
 
 
-                        BeamCast();
+                        switch (bullet[weaponIndex].beamType)
+                        {
+                            case 1:
+                                PulseLaser();
+                                break;
+                            case 2:
+                                BeamCast();
+                                break;
+
+
+                            default:
+                            case 0:
+                                Debug.LogError("Beam Type Is 0. Unable to Cast Beam. Check If logic.");
+                                break;
+                        }
+
+
+
+
+                        //BeamCast();
 
                         if (bullet[weaponIndex].loop)
                         {
@@ -244,85 +272,41 @@ public class GunManager : MonoBehaviour
 
     }
 
-    void BeamCast()
+
+
+
+    void PulseLaser()
     {
-
         LineRend.material = bullet[weaponIndex].material;
-        if (bullet[weaponIndex].beamType == 1)
+        if (timer >= bullet[weaponIndex].fireRate)
         {
-            if (timer >= bullet[weaponIndex].fireRate)
-            {
 
-                RaycastHit hitCollider;
-                bool hit = Physics.Raycast(transform.position, transform.forward, out hitCollider);//Physics.OverlapSphere(Explosion Source,Explosion radius)
-
-                if (hit)
-                {
-
-
-                    LineRend.SetPosition(1, hitCollider.point);
-
-                    LineRend.enabled = true;
-
-                    if (bullet[weaponIndex].splashRadius > 0)
-                    {
-                        AreaOfEffect_Beam(hitCollider.point, bullet[weaponIndex].splashRadius);
-                    }
-
-                    IDamagable damagable = hitCollider.transform.GetComponent<IDamagable>();
-                    if (damagable != null)
-                    {
-                        damagable.Damage(bullet[weaponIndex].damage);
-                    }
-                    //Debug.Log("Beam type 1");
-
-                }
-                else
-                {
-
-                    Vector3 endpos = transform.forward * 1000.0f;
-                    LineRend.SetPosition(1, endpos);
-                    LineRend.enabled = true;
-                }
-
-                if (!bullet[weaponIndex].loop)
-                {
-                    playerSourceAudio.PlayOneShot(bullet[weaponIndex].clip, playerSourceAudio.volume);
-                }
-
-
-                if (!infiniteAmmo)
-                {
-                    bullet[weaponIndex].ammo -= 1;
-                }
-                    timer = 0;
-            }
-        }
-        else if(bullet[weaponIndex].beamType == 2)
-        {
             RaycastHit hitCollider;
             bool hit = Physics.Raycast(transform.position, transform.forward, out hitCollider);//Physics.OverlapSphere(Explosion Source,Explosion radius)
-            //Debug.Log("type 2");
+
             if (hit)
             {
-                if (hitCollider.transform.tag != "Player")
+                GameObject las = laserEffectPool.GetComponent<LaserEffectPool>().GetLaserEffectObject();
+                //Debug.Log("Las");
+                las.GetComponent<LaserEffectItem>().effectName = bullet[weaponIndex].effectName;
+                las.transform.position = hitCollider.point;
+                las.SetActive(true);
+
+                LineRend.SetPosition(1, hitCollider.point);
+
+                LineRend.enabled = true;
+
+                if (bullet[weaponIndex].splashRadius > 0)
                 {
-                    LineRend.SetPosition(1, hitCollider.point);
-
-                    LineRend.enabled = true;
-
-                    if (bullet[weaponIndex].splashRadius > 0)
-                    {
-                        AreaOfEffect_Beam(hitCollider.point, bullet[weaponIndex].splashRadius);
-                    }
-
-                    IDamagable damagable = hitCollider.transform.GetComponent<IDamagable>();
-                    if (damagable != null)
-                    {
-                        damagable.Damage(bullet[weaponIndex].damage * Time.deltaTime);
-                    }
+                    AreaOfEffect_Beam(hitCollider.point, bullet[weaponIndex].splashRadius);
                 }
 
+                IDamagable damagable = hitCollider.transform.GetComponent<IDamagable>();
+                if (damagable != null)
+                {
+                    damagable.Damage(bullet[weaponIndex].damage);
+                }
+                //Debug.Log("Beam type 1");
 
             }
             else
@@ -331,24 +315,83 @@ public class GunManager : MonoBehaviour
                 Vector3 endpos = transform.forward * 1000.0f;
                 LineRend.SetPosition(1, endpos);
                 LineRend.enabled = true;
-
             }
 
-            if (timer >= bullet[weaponIndex].fireRate)
+            if (!bullet[weaponIndex].loop)
             {
-                if (!bullet[weaponIndex].loop)
+                playerSourceAudio.PlayOneShot(bullet[weaponIndex].clip, playerSourceAudio.volume);
+            }
+
+
+            if (!infiniteAmmo)
+            {
+                bullet[weaponIndex].ammo -= 1;
+            }
+            timer = 0;
+        }
+    }
+
+    void BeamCast()
+    {
+        LineRend.material = bullet[weaponIndex].material;
+
+        RaycastHit hitCollider;
+        bool hit = Physics.Raycast(transform.position, transform.forward, out hitCollider);//Physics.OverlapSphere(Explosion Source,Explosion radius)
+                                                                                           //Debug.Log("type 2");
+        if (hit)
+        {
+            if (hitCollider.transform.tag != "Player")
+            {
+                LineRend.SetPosition(1, hitCollider.point);
+
+                LineRend.enabled = true;
+
+                if (bullet[weaponIndex].splashRadius > 0)
                 {
-                    playerSourceAudio.PlayOneShot(bullet[weaponIndex].clip, playerSourceAudio.volume);
+                    AreaOfEffect_Beam(hitCollider.point, bullet[weaponIndex].splashRadius);
                 }
 
-                if (!infiniteAmmo)
+                IDamagable damagable = hitCollider.transform.GetComponent<IDamagable>();
+                if (damagable != null)
                 {
-                    bullet[weaponIndex].ammo -= 1;
+                    damagable.Damage(bullet[weaponIndex].damage * Time.deltaTime);
                 }
-                timer = 0;
             }
+
 
         }
+        else
+        {
+
+            Vector3 endpos = transform.forward * 1000.0f;
+            LineRend.SetPosition(1, endpos);
+            LineRend.enabled = true;
+
+        }
+
+        if (timer >= bullet[weaponIndex].fireRate)
+        {
+
+            if (hit)
+            {
+                GameObject las = laserEffectPool.GetComponent<LaserEffectPool>().GetLaserEffectObject();
+                las.GetComponent<LaserEffectItem>().effectName = bullet[weaponIndex].effectName;
+                las.transform.position = hitCollider.point;
+                las.SetActive(true);
+            }
+
+            if (!bullet[weaponIndex].loop)
+            {
+                playerSourceAudio.PlayOneShot(bullet[weaponIndex].clip, playerSourceAudio.volume);
+            }
+
+            if (!infiniteAmmo)
+            {
+                bullet[weaponIndex].ammo -= 1;
+            }
+            timer = 0;
+        }
+
 
         //float dist = (hitCollider.transform.position - transform.position).magnitude;
     }

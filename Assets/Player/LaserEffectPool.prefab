@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserEffects:
-  - {fileID: 1595424279684552, guid: febec20f2a1ed42439be9f1dd8aade4d, type: 2}
+  - {fileID: 1109831213951796, guid: 0e37fb4b8448a934490c2967008d6d04, type: 2}
   initialSize: 200
   laserEffectObj: {fileID: 1222537840944980, guid: c9e910bf71cd09f48808998f84105310,
     type: 2}

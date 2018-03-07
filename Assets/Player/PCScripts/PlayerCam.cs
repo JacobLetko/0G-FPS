@@ -129,7 +129,7 @@ public class PlayerCam : MonoBehaviour
         }
         else
         {
-            camT.transform.position = transform.position + new Vector3(0, 0.1f, 0);
+            camT.transform.position = transform.position + transform.up * 0.1f;//new Vector3(0, 0.1f, 0);
             camT.rotation = transform.rotation;
         }
 

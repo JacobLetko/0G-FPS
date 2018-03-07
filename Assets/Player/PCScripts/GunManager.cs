@@ -312,7 +312,7 @@ public class GunManager : MonoBehaviour
             else
             {
 
-                Vector3 endpos = transform.forward * 1000.0f;
+                Vector3 endpos = transform.position + transform.forward * 1000.0f;
                 LineRend.SetPosition(1, endpos);
                 LineRend.enabled = true;
             }
@@ -363,7 +363,7 @@ public class GunManager : MonoBehaviour
         else
         {
 
-            Vector3 endpos = transform.forward * 1000.0f;
+            Vector3 endpos = transform.position + transform.forward * 1000.0f;
             LineRend.SetPosition(1, endpos);
             LineRend.enabled = true;
 

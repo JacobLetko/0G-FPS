@@ -1363,6 +1363,21 @@ Prefab:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 114409172617818008, guid: 0b8e3806ccbd6da41b9c01712f63c0d9,
+        type: 2}
+      propertyPath: bullet.Array.data[0].beamType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114409172617818008, guid: 0b8e3806ccbd6da41b9c01712f63c0d9,
+        type: 2}
+      propertyPath: bullet.Array.data[0].fireRate
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 114409172617818008, guid: 0b8e3806ccbd6da41b9c01712f63c0d9,
+        type: 2}
+      propertyPath: bullet.Array.data[0].damage
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0b8e3806ccbd6da41b9c01712f63c0d9, type: 2}
   m_IsPrefabParent: 0

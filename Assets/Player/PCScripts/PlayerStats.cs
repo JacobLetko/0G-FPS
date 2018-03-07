@@ -47,7 +47,10 @@ public class PlayerStats : MonoBehaviour, IDamagable
             currentHP = hitPoints;
             if(!audioSource.isPlaying)
             {
-                audioSource.PlayOneShot(damaged);
+                audioSource.pitch = 3;
+                audioSource.PlayOneShot(damaged,0.5f);
+
+                //audioSource.pitch = 1;
             }
             
         }

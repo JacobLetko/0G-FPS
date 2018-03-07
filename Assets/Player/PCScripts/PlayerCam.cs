@@ -6,6 +6,10 @@ public class PlayerCam : MonoBehaviour
 {
     //This is the first person cam controls
 
+    [Header("Assets")]
+    public AudioSource audioSource;
+    public AudioClip bounce;
+
     [Header("Player Controls")]
     public float acceleration;
 
@@ -34,7 +38,6 @@ public class PlayerCam : MonoBehaviour
     public float angularBreakDrag = 7;
     float normalDrag;
     float normalAngularDrag;
-
     Transform camT;
     Rigidbody myRig;
 
@@ -50,6 +53,15 @@ public class PlayerCam : MonoBehaviour
         normalDrag = myRig.drag;
         normalAngularDrag = myRig.angularDrag;
 
+
+        if (audioSource != null)
+        {
+            if (audioSource.isPlaying == true)
+            {
+                audioSource.Stop();
+            }
+        }
+
     }
 
 
@@ -59,6 +71,23 @@ public class PlayerCam : MonoBehaviour
     {
 
 
+        //if (playClip)//((audioStopTimer > 0.1f))
+        //{
+        //    if (audioSource.isPlaying == false)
+        //    {
+        //        audioSource.Play();
+        //    }
+
+
+        //}
+        //else
+        //{
+        //    if (audioSource.isPlaying == true)
+        //    {
+        //        audioSource.Stop();
+        //    }
+
+        //}
 
 
         vert = 0;
@@ -72,7 +101,7 @@ public class PlayerCam : MonoBehaviour
         depth = Input.GetAxis("Jump");
         posTilt = Input.GetAxis("PosZAxisRotate");
         negTilt = -Input.GetAxis("NegZAxisRotate");
-
+        
         if (posTilt >= 0.3 && negTilt <= -0.3)
         {
             breaking = true;
@@ -100,10 +129,26 @@ public class PlayerCam : MonoBehaviour
         }
         else
         {
-            camT.transform.position = transform.position + new Vector3(0, 0.1f, 0);
+            camT.transform.position = transform.position + transform.up * 0.1f;//new Vector3(0, 0.1f, 0);
             camT.rotation = transform.rotation;
         }
 
+        if ((Input.GetAxis("Vertical") != 0) || (Input.GetAxis("Horizontal") != 0) || (Input.GetAxis("Jump") != 0) || (Input.GetAxis("PosZAxisRotate") != 0) || (Input.GetAxis("NegZAxisRotate") != 0))
+        {
+            if (audioSource.isPlaying == false)
+            {
+
+                audioSource.Play();
+            }
+            audioSource.volume = Mathf.Clamp(0.5f / metersPerSec, 0.5f, 3);
+        }
+        else
+        {
+            if (audioSource.isPlaying == true)
+            {
+                audioSource.Stop();
+            }
+        }
 
 
 
@@ -120,12 +165,13 @@ public class PlayerCam : MonoBehaviour
         {
             myRig.drag = breakDrag;
             myRig.angularDrag = angularBreakDrag;
-            
+
         }
         else
         {
             myRig.drag = normalDrag;
             myRig.angularDrag = normalAngularDrag;
+
         }
         //Movement controls
         if (vert >= 0)//(Input.GetKey(KeyCode.W))
@@ -207,4 +253,11 @@ public class PlayerCam : MonoBehaviour
             camT.transform.position = transform.position - transform.forward * thirdPersonCameraDist;
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        audioSource.PlayOneShot(bounce,1);
+    }
+
+
 }

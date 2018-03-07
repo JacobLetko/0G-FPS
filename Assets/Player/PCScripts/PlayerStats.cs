@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour, IDamagable
 {
-
+    public AudioSource audioSource;
+    public AudioClip damaged;
     public float hitPoints = 100;
     //public float shieldPoints = 100;
-
+    float currentHP;
 
 
     public void Damage(float amt)
@@ -17,7 +18,8 @@ public class PlayerStats : MonoBehaviour, IDamagable
         //    shieldPoints -= amt;
         //}
         hitPoints -= amt;
-        Mathf.Clamp(hitPoints, 0, 100);
+        hitPoints = Mathf.Clamp(hitPoints, 0, 100);
+        
 
     }
 
@@ -26,6 +28,34 @@ public class PlayerStats : MonoBehaviour, IDamagable
         return hitPoints;
     }
 
+
+    void Start()
+    {
+        currentHP = hitPoints;
+        AudioSource[] array = GetComponents<AudioSource>();
+        if(array.Length > 1)
+        {
+            audioSource = array[1];
+        }
+    }
+
+    void Update()
+    {
+        if (currentHP > hitPoints)
+        {
+            Debug.Log("i was hit");
+            currentHP = hitPoints;
+            if(!audioSource.isPlaying)
+            {
+                audioSource.PlayOneShot(damaged);
+            }
+            
+        }
+        if (currentHP < hitPoints)
+        {
+            currentHP = hitPoints;
+        }
+    }
 
 
 }

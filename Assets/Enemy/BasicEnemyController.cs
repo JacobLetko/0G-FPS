@@ -40,6 +40,7 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
     public Transform player;
     public AudioSource audioSource;
     public BulletPool bulletPool;
+    public LaserEffectPool laserEffectPool;
     public NodeGraphManager graphManager;
     public GameObject bulletPrefab;
     public ParticleSystem explodeEffect;
@@ -48,6 +49,7 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
     public GameObject laserLight;
     public GameObject gunLight;
     public LineRenderer lineRenderer;
+    public GameObject[] damageEffects;
 
     private float health;
     private bool alive = true;
@@ -122,6 +124,18 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
             }
             else if(state == EnemyState.Pathing)
             {
+                Vector3 trgOffset = trgPos - transform.position;
+                float angleDif = Vector3.Angle(transform.position, trgPos);
+                Vector3 cross = Vector3.Cross(transform.forward, trgOffset);
+                float rampedSpeed = rotationForce * (cross.magnitude / angleDif);
+
+                float appliedSpeed = Mathf.Min(rampedSpeed, rotationForce);
+                Vector3 desiredTorque = cross * (appliedSpeed / cross.magnitude);
+
+                body.AddTorque(desiredTorque - body.angularVelocity);
+
+
+
                 Debug.DrawLine(transform.position, trgPos);
                 if (Vector3.Distance(transform.position, trgPos) <= pathReachDist)
                 {
@@ -138,6 +152,7 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
                     {
                         trgPos = Vector3.zero;
                         state = EnemyState.Idle;
+                        body.AddTorque(-body.angularVelocity);
                     }
                 }
             }
@@ -178,9 +193,9 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
                 }
                 else
                 {
-                    body.AddTorque(-body.angularVelocity);
                     if(state == EnemyState.Attacking)
                     {
+                        body.AddTorque(-body.angularVelocity);
                         state = EnemyState.Chasing;
                         if(graphManager != null)
                         {
@@ -204,6 +219,7 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
                         
                         if (state == EnemyState.Chasing)
                         {
+                            body.AddTorque(-body.angularVelocity);
                             GoToTarg(wobbleForce);
                         }
                         else if(state == EnemyState.Pathing)
@@ -255,6 +271,19 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
         if(alive)
         {
             health = Mathf.Clamp(health - amt, 0.0f, maxHealth);
+
+            if(damageEffects.Length > 0)
+            {
+                float dmgLvl = maxHealth / damageEffects.Length;
+                for (int i = 0; i < damageEffects.Length; ++i)
+                {
+                    if (health <= (i + 1) * dmgLvl)
+                    {
+                        damageEffects[i].SetActive(true);
+                    }
+                }
+            }
+
             if (health <= 0)
             {
                 Kill();
@@ -278,6 +307,11 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
         
         explodeParts.SetActive(true);
 
+        foreach(GameObject g in damageEffects)
+        {
+            g.SetActive(false);
+        }
+
         GetComponent<Collider>().enabled = false;
         modelObj.GetComponent<Renderer>().enabled = false;
     }
@@ -290,6 +324,14 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
         {
             audioSource.pitch = Random.Range(shootPitchRange.x, shootPitchRange.y);
             audioSource.PlayOneShot(shootSound);
+
+            if(laserEffectPool != null)
+            {
+                GameObject sparks = laserEffectPool.GetLaserEffectObject();
+                sparks.GetComponent<LaserEffectItem>().effectName = "ElectricalSparksEffect";
+                sparks.transform.position = hit.point;
+                sparks.SetActive(true);
+            }
 
             lineRenderer.SetPosition(0, transform.position);
             lineRenderer.enabled = true;

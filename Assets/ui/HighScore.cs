@@ -84,7 +84,6 @@ public static class HighScore
     public static void save()
     {
         BinaryFormatter bf = new BinaryFormatter();
-        Debug.Log(sceneName + "save");
         //scores
         FileStream file = File.Create(Application.persistentDataPath + "/" + sceneName + "Scores.gd");
         bf.Serialize(file, HighScore.scores);
@@ -98,7 +97,6 @@ public static class HighScore
     public static void load()
     {
         BinaryFormatter bf = new BinaryFormatter();
-        Debug.Log(sceneName + "load");
         //scores
         if (File.Exists(Application.persistentDataPath + "/" + sceneName + "Scores.gd"))
         {    

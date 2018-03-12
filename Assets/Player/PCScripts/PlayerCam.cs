@@ -101,8 +101,12 @@ public class PlayerCam : MonoBehaviour
         depth = Input.GetAxis("Jump");
         posTilt = Input.GetAxis("PosZAxisRotate");
         negTilt = -Input.GetAxis("NegZAxisRotate");
-        
-        if (posTilt >= 0.3 && negTilt <= -0.3)
+
+      //  Debug.Log("E input : " + posTilt);
+      //  Debug.Log("Q input : " + negTilt);
+
+
+        if (posTilt >= 0.3 && negTilt <= -0.3 || (Input.GetKey("left shift")))
         {
             breaking = true;
 
@@ -158,8 +162,8 @@ public class PlayerCam : MonoBehaviour
 
 
     void FixedUpdate()
-    {     
-        
+    {
+
         //breaking
         if (breaking)
         {
@@ -207,6 +211,7 @@ public class PlayerCam : MonoBehaviour
             if (metersPerSec < HardSpeedLimmit)
             {
                 myRig.AddRelativeForce(new Vector3(0, acceleration * throttle, 0));// * Time.deltaTime);
+                Debug.Log("CNTRL + E");
             }
         }
         if (depth <= 0)//(Input.GetKey(KeyCode.C))
@@ -214,6 +219,7 @@ public class PlayerCam : MonoBehaviour
             if (metersPerSec < HardSpeedLimmit)
             {
                 myRig.AddRelativeForce(new Vector3(0, -acceleration * throttle, 0));// * Time.deltaTime);
+                Debug.Log("CNTRL + Q");
             }
         }
 
@@ -225,13 +231,9 @@ public class PlayerCam : MonoBehaviour
 
 
         //cam tilt controls
-        //if (tilt >= 0)//(Input.GetKey(KeyCode.E))
-        //{
-            myRig.AddRelativeTorque(Vector3.forward * Input.GetAxis("PosZAxisRotate") * -tiltSensitivity);//(Vector3.forward * ((-acceleration / 3) * Time.deltaTime));
-            myRig.AddRelativeTorque(Vector3.forward * -Input.GetAxis("NegZAxisRotate") * -tiltSensitivity);//(Vector3.forward * ((-acceleration / 3) * Time.deltaTime));
-        //}
 
-
+        myRig.AddRelativeTorque(Vector3.forward * Input.GetAxis("PosZAxisRotate") * -tiltSensitivity);//(Vector3.forward * ((-acceleration / 3) * Time.deltaTime));
+        myRig.AddRelativeTorque(Vector3.forward * -Input.GetAxis("NegZAxisRotate") * -tiltSensitivity);//(Vector3.forward * ((-acceleration / 3) * Time.deltaTime));
 
 
 

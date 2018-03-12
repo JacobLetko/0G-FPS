@@ -23,7 +23,6 @@ public static class HighScore
         //Loop through the capacity, (This is what data we already have)
 
         //Loop through the remaining and add new data
-        Debug.Log("start sort");
         load();
 
         int[] tempS = new int[10];
@@ -63,7 +62,6 @@ public static class HighScore
     }
     public static void save()
     {
-        Debug.Log("start save");
         BinaryFormatter bf = new BinaryFormatter();
         
         //scores
@@ -75,11 +73,9 @@ public static class HighScore
         FileStream file2 = File.Create(Application.persistentDataPath + "/Names.gd");
         bf.Serialize(file2, HighScore.names);
         file2.Close();
-        Debug.Log("saved");
     }
     public static void load()
     {
-        Debug.Log("start load");
         BinaryFormatter bf = new BinaryFormatter();
         
         //scores
@@ -95,7 +91,6 @@ public static class HighScore
             HighScore.names = (string[])bf.Deserialize(file);
             file.Close();
         }
-        Debug.Log("loaded");
     }
     public static void clear()
     {

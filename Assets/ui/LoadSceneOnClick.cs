@@ -16,6 +16,10 @@ public class LoadSceneOnClick : MonoBehaviour
         {
             SceneManager.LoadScene(HighScore.sceneName);
         }
+        else if(sceneName == "reset")
+        {
+            SceneManager.LoadScene(HighScore.sceneName);
+        }
         else
         {
             SceneManager.LoadScene(sceneName);

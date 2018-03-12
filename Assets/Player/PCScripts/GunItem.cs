@@ -13,16 +13,17 @@ public class GunItem
     
 
     [Header("Core Mechanics")]
-    [Tooltip("Enabling isBeam negates the Speed, lifetime, accuracyModifier, and hasTrail variables." +
+    [Tooltip("Enabling isBeam negates the Speed, lifetime, accuracyModifier, and HasTrail variables." +
         "\n0 = 0ff," +
         "\n1 = pulse(Obeys fireRate)," +
         "\n2 = on(ignores fireRate in favor of damage/time)")]
     [Range(0,2)]
     public int beamType;
-
+    public string name;
 
 
     //if Isbeam is false these are active--------------------------
+    [Header("Projectile only")]
     public float speed;  
     public float lifetime;
     public bool hasTrail = false;
@@ -30,14 +31,12 @@ public class GunItem
     public float accuracyModifier = 1;
     //-------------------------------------------------------------
     [Space]
-
+    [Header("Universal Gun Variables")]
     public AudioClip contactSound;
 
     public string effectName;
 
     public Material material;
-
-    public string name;
 
     public float damage;
 

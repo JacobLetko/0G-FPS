@@ -16,7 +16,28 @@ public static class HighScore
     
     public static string playerName;
 
-
+    public static void befSort()
+    {
+        if (sceneName == "ProBuilderTest")
+        {
+            sort();
+            score = 0;
+            playerName = "";
+        }
+        else if (sceneName == "Level2")
+        {
+            sort();
+            score = 0;
+            playerName = "";
+        }
+        else
+        {
+            sceneName = "ProBuilderTest";
+            sort();
+            sceneName = "Level2";
+            sort();
+        }
+    }
 
     public static void sort()
     {
@@ -63,7 +84,6 @@ public static class HighScore
     public static void save()
     {
         BinaryFormatter bf = new BinaryFormatter();
-        
         //scores
         FileStream file = File.Create(Application.persistentDataPath + "/" + sceneName + "Scores.gd");
         bf.Serialize(file, HighScore.scores);
@@ -77,7 +97,6 @@ public static class HighScore
     public static void load()
     {
         BinaryFormatter bf = new BinaryFormatter();
-        
         //scores
         if (File.Exists(Application.persistentDataPath + "/" + sceneName + "Scores.gd"))
         {    
@@ -94,12 +113,23 @@ public static class HighScore
     }
     public static void clear()
     {
-        for(int i = 0; i < 10; i++)
+        HighScore.sceneName = "ProBuilderTest";
+        for (int i = 0; i < 10; i++)
         {
             scores[i] = 0;
             names[i] = "player";
         }
         save();
+
+        HighScore.sceneName = "Level2";
+        for (int i = 0; i < 10; i++)
+        {
+            scores[i] = 0;
+            names[i] = "player";
+        }
+        save();
+
+        HighScore.sceneName = "";
     }
 
     public static void resetScore()

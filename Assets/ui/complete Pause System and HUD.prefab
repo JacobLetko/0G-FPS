@@ -1193,7 +1193,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 3
           m_FloatArgument: 0
-          m_StringArgument: ProBuilderTest
+          m_StringArgument: reset
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 82275326537584746}
@@ -1889,6 +1889,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cef62cbcc8eee146b491b505f59f513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level1scores: {fileID: 0}
+  level2scores: {fileID: 0}
   scoretext: {fileID: 114789015764960706}
 --- !u!114 &114662341472650172
 MonoBehaviour:
@@ -2080,6 +2082,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cef62cbcc8eee146b491b505f59f513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level1scores: {fileID: 0}
+  level2scores: {fileID: 0}
   scoretext: {fileID: 114329833157795746}
 --- !u!114 &114767523929727134
 MonoBehaviour:

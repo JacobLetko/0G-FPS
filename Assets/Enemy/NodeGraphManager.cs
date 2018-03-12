@@ -24,23 +24,15 @@ public class NodeGraphManager : MonoBehaviour {
 
     [Header("Debugging")]
     public bool debugRender;
-    public LineRenderer lineRenderer;
 
     private List<Node> graph;
+    private List<Vector3> debugLines;
 
 
 
     private void Start()
     {
-        if(debugRender)
-        {
-            lineRenderer.enabled = true;
-            lineRenderer.positionCount = 0;
-        }
-        else
-        {
-            lineRenderer.enabled = false;
-        }
+        debugLines = new List<Vector3>();
 
         graph = new List<Node>();
 
@@ -83,15 +75,24 @@ public class NodeGraphManager : MonoBehaviour {
         }
     }
 
+    private void Update()
+    {
+        if(debugRender)
+        {
+            for (int i = 0; i < debugLines.Count; i += 2)
+            {
+                Debug.DrawLine(debugLines[i], debugLines[i + 1], Color.magenta);
+            }
+        }
+    }
+
     private void AddLink(Node n, Node t)
     {
         n.links.Add(t);
         if (debugRender)
         {
-            int idx = lineRenderer.positionCount;
-            lineRenderer.positionCount += 2;
-            lineRenderer.SetPosition(idx, n.trans.position);
-            lineRenderer.SetPosition(idx+1, t.trans.position);
+            debugLines.Add(n.trans.position);
+            debugLines.Add(t.trans.position);
         }
     }
 

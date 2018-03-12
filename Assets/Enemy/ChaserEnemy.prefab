@@ -1373,6 +1373,7 @@ MonoBehaviour:
   player: {fileID: 0}
   audioSource: {fileID: 82626467859566068}
   bulletPool: {fileID: 0}
+  laserEffectPool: {fileID: 0}
   graphManager: {fileID: 0}
   bulletPrefab: {fileID: 1151126990084618, guid: 83710c0df0f5db24d87e7663d1f9b953,
     type: 2}
@@ -1382,6 +1383,7 @@ MonoBehaviour:
   laserLight: {fileID: 1080450245800136}
   gunLight: {fileID: 1791123289798086}
   lineRenderer: {fileID: 120335222174598068}
+  damageEffects: []
 --- !u!120 &120335222174598068
 LineRenderer:
   m_ObjectHideFlags: 1

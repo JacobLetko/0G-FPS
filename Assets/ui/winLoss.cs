@@ -31,7 +31,7 @@ public class winLoss : MonoBehaviour {
         {
             if (invoking == false)
             {
-                Invoke("SwitchScreenLose", 0.0f);
+                Invoke("SwitchScreenLose", 3.0f);
                 invoking = true;
             }
         }

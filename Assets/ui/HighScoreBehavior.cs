@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class HighScoreBehavior : MonoBehaviour {
 
+    public Text level1scores;
+    public Text level2scores;
     public Text scoretext;
 
     public void display()
@@ -14,17 +16,35 @@ public class HighScoreBehavior : MonoBehaviour {
 
     public void table()
     {
-            for (int i = 0; i < HighScore.names.Length; i++)
+        HighScore.sceneName = "ProBuilderTest";
+        HighScore.load();
+        for (int i = 0; i < HighScore.names.Length; i++)
             {
             if (i == 0)
             {
-                scoretext.text = (i + 1) + ".    " + HighScore.names[i] + "   " + HighScore.scores[i] + "\n";
+                level1scores.text = (i + 1) + ".    " + HighScore.names[i] + "   " + HighScore.scores[i] + "\n";
             }
             else
             {
-                scoretext.text += (i + 1) + ".    " + HighScore.names[i] + "   " + HighScore.scores[i] + "\n";
+                level1scores.text += (i + 1) + ".    " + HighScore.names[i] + "   " + HighScore.scores[i] + "\n";
             }
             }
+        HighScore.save();
+
+        HighScore.sceneName = "Level2";
+        HighScore.load();
+        for (int i = 0; i < HighScore.names.Length; i++)
+        {
+            if (i == 0)
+            {
+                level2scores.text = (i + 1) + ".    " + HighScore.names[i] + "   " + HighScore.scores[i] + "\n";
+            }
+            else
+            {
+                level2scores.text += (i + 1) + ".    " + HighScore.names[i] + "   " + HighScore.scores[i] + "\n";
+            }
+        }
+        HighScore.save();
     }
 
     public void addName(Text name)
@@ -39,7 +59,7 @@ public class HighScoreBehavior : MonoBehaviour {
 
     public void loadScores()
     {
-        HighScore.sort();
+        HighScore.befSort();
     }
     public void ResetScores()
     {

@@ -1,0 +1,14 @@
+retro-video-game-sfx-bounce: 		Author - OwlStorm
+			     		Link - https://freesound.org/people/OwlStorm/
+
+gun-shot: 	             		Author - Bird_man
+		             		Link - https://freesound.org/people/Bird_man/
+
+someguy22__8-bit-bounce: 		Author - SomeGuy22
+					Link - https://freesound.org/people/SomeGuy22/
+
+sharesynth__gunshot00: 			Author - sharesynth
+					Link - https://freesound.org/people/sharesynth/
+
+gezortenplotz__bouncing-off-glass:	Author - gezortenplotz
+					Link - https://freesound.org/people/gezortenplotz/

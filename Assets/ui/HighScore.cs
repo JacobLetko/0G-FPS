@@ -9,7 +9,7 @@ public static class HighScore
 {
     public static int score;
     static public bool show;
-
+    public static string sceneName;
 
     public static int[] scores = new int[10];
     public static string[] names = new string[10];
@@ -65,12 +65,12 @@ public static class HighScore
         BinaryFormatter bf = new BinaryFormatter();
         
         //scores
-        FileStream file = File.Create(Application.persistentDataPath + "/Scores.gd");
+        FileStream file = File.Create(Application.persistentDataPath + sceneName + "/Scores.gd");
         bf.Serialize(file, HighScore.scores);
         file.Close();
 
         //names
-        FileStream file2 = File.Create(Application.persistentDataPath + "/Names.gd");
+        FileStream file2 = File.Create(Application.persistentDataPath + sceneName + "/Names.gd");
         bf.Serialize(file2, HighScore.names);
         file2.Close();
     }
@@ -79,15 +79,15 @@ public static class HighScore
         BinaryFormatter bf = new BinaryFormatter();
         
         //scores
-        if (File.Exists(Application.persistentDataPath + "/Scores.gd"))
+        if (File.Exists(Application.persistentDataPath + sceneName + "/Scores.gd"))
         {    
-            FileStream file = File.Open(Application.persistentDataPath + "/Scores.gd", FileMode.Open);
+            FileStream file = File.Open(Application.persistentDataPath + sceneName + "/Scores.gd", FileMode.Open);
             HighScore.scores = (int[])bf.Deserialize(file);
             file.Close();
         }
-        if (File.Exists(Application.persistentDataPath + "/Names.gd"))
+        if (File.Exists(Application.persistentDataPath + sceneName + "/Names.gd"))
         {
-            FileStream file = File.Open(Application.persistentDataPath + "/Names.gd", FileMode.Open);
+            FileStream file = File.Open(Application.persistentDataPath + sceneName + "/Names.gd", FileMode.Open);
             HighScore.names = (string[])bf.Deserialize(file);
             file.Close();
         }
@@ -100,7 +100,6 @@ public static class HighScore
             names[i] = "player";
         }
         save();
-        Debug.Log("clear");
     }
 
     public static void resetScore()

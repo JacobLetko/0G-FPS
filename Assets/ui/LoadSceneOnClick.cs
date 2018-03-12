@@ -12,5 +12,10 @@ public class LoadSceneOnClick : MonoBehaviour
             HighScore.resetScore();
         }
         SceneManager.LoadScene(sceneName);
+
+        if(sceneName == "proBuilderTest" || sceneName == "Level2")
+        {
+            HighScore.sceneName = sceneName;
+        }
     }
 }

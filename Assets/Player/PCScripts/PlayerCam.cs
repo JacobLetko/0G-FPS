@@ -211,7 +211,7 @@ public class PlayerCam : MonoBehaviour
             if (metersPerSec < HardSpeedLimmit)
             {
                 myRig.AddRelativeForce(new Vector3(0, acceleration * throttle, 0));// * Time.deltaTime);
-                Debug.Log("CNTRL + E");
+                //Debug.Log("CNTRL + E");
             }
         }
         if (depth <= 0)//(Input.GetKey(KeyCode.C))
@@ -219,7 +219,7 @@ public class PlayerCam : MonoBehaviour
             if (metersPerSec < HardSpeedLimmit)
             {
                 myRig.AddRelativeForce(new Vector3(0, -acceleration * throttle, 0));// * Time.deltaTime);
-                Debug.Log("CNTRL + Q");
+                //Debug.Log("CNTRL + Q");
             }
         }
 
@@ -256,10 +256,10 @@ public class PlayerCam : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        audioSource.PlayOneShot(bounce,1);
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    audioSource.PlayOneShot(bounce,1);
+    //}
 
 
 }

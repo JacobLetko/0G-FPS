@@ -179,7 +179,8 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
 
                     float    appliedSpeed = Mathf.Min(rampedSpeed, rotationForce);
                     Vector3 desiredTorque = cross * (appliedSpeed / cross.magnitude);
-                    
+
+                    body.AddTorque(-body.angularVelocity);
                     body.AddTorque(desiredTorque - body.angularVelocity);
 
                     if (trgPos == Vector3.zero)

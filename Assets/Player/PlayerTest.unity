@@ -459,12 +459,12 @@ Prefab:
     - target: {fileID: 114006748020574462, guid: e23f73121b6f939459bb6f869204d93f,
         type: 2}
       propertyPath: bulletSpeed
-      value: 100
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114006748020574462, guid: e23f73121b6f939459bb6f869204d93f,
         type: 2}
       propertyPath: gunCooldown
-      value: 1
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 1952584018576190, guid: e23f73121b6f939459bb6f869204d93f, type: 2}
       propertyPath: m_Name
@@ -483,8 +483,18 @@ Prefab:
     - target: {fileID: 114006748020574462, guid: e23f73121b6f939459bb6f869204d93f,
         type: 2}
       propertyPath: bulletDamage
-      value: 0.01
+      value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114006748020574462, guid: e23f73121b6f939459bb6f869204d93f,
+        type: 2}
+      propertyPath: rotationForce
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114006748020574462, guid: e23f73121b6f939459bb6f869204d93f,
+        type: 2}
+      propertyPath: shootSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 548113de6462a924e804330926221ad8, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e23f73121b6f939459bb6f869204d93f, type: 2}
   m_IsPrefabParent: 0
@@ -1363,11 +1373,6 @@ Prefab:
       propertyPath: bulletPool
       value: 
       objectReference: {fileID: 2005467198}
-    - target: {fileID: 108639946274273588, guid: 0b8e3806ccbd6da41b9c01712f63c0d9,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0b8e3806ccbd6da41b9c01712f63c0d9, type: 2}
   m_IsPrefabParent: 0
@@ -1651,58 +1656,3 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 2005467197}
   m_Script: {fileID: 11500000, guid: 76f3f3a82bc064e409242233cd58f694, type: 3}
---- !u!1 &2083737820 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1570574273966518, guid: 0b8e3806ccbd6da41b9c01712f63c0d9,
-    type: 2}
-  m_PrefabInternal: {fileID: 1688241910}
---- !u!108 &2083737826
-Light:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2083737820}
-  m_Enabled: 1
-  serializedVersion: 8
-  m_Type: 0
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_Intensity: 100
-  m_Range: 60
-  m_SpotAngle: 1
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 0
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_Lightmapping: 4
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
-  m_FalloffTable:
-    m_Table[0]: 0
-    m_Table[1]: 0
-    m_Table[2]: 0
-    m_Table[3]: 0
-    m_Table[4]: 0
-    m_Table[5]: 0
-    m_Table[6]: 0
-    m_Table[7]: 0
-    m_Table[8]: 0
-    m_Table[9]: 0
-    m_Table[10]: 0
-    m_Table[11]: 0
-    m_Table[12]: 0
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0

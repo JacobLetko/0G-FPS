@@ -5009,7 +5009,9 @@ MonoBehaviour:
   laserLight: {fileID: 0}
   gunLight: {fileID: 0}
   lineRenderer: {fileID: 0}
+  thrustParticles: []
   damageEffects: []
+  gunPoints: []
 --- !u!23 &421998988
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -28,8 +28,8 @@ public class PlayerStats : MonoBehaviour, IDamagable
         if(hitPoints <= 0 && !playedDeath)
         {
             fighterSkin.SetActive(false);
-            Rigidbody rig = GetComponent<Rigidbody>();
-            rig.drag = 99999;
+            PlayerCam rig = GetComponent<PlayerCam>();
+            rig.enabled = false;
 
             Collider col = GetComponent<Collider>();
             col.enabled = false;

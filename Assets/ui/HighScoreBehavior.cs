@@ -75,6 +75,8 @@ public class HighScoreBehavior : MonoBehaviour {
 
         SaveTable(level2Tbl, "Level2");
         SaveTable(probuildertestTable, "ProBuilderTest");
+
+        table();
     }
 
     public void Awake()
@@ -105,8 +107,10 @@ public class HighScoreBehavior : MonoBehaviour {
         string rtn = "";
         for (int i = 0; i < hst.scoreTable.Count; i++)
         {
-            rtn += (i + 1)+".   "+  hst.scoreTable[i].name + "   " + hst.scoreTable[i].score + "\n";
-
+            if (i < 10)
+            {
+                rtn += (i + 1) + ".   " + hst.scoreTable[i].name + "   " + hst.scoreTable[i].score + "\n";
+            }
         }
 
         return rtn;

@@ -12,13 +12,10 @@ public class LoadSceneOnClick : MonoBehaviour
             HighScore.resetScore();
         }
 
-        if (sceneName == "win" || sceneName == "GameOver")
+
+        if(sceneName == "reset")
         {
-            SceneManager.LoadScene(HighScore.sceneName);
-        }
-        else if(sceneName == "reset")
-        {
-            SceneManager.LoadScene(HighScore.sceneName);
+            SceneManager.LoadScene(HighScore.resetscene);
         }
         else
         {
@@ -28,6 +25,10 @@ public class LoadSceneOnClick : MonoBehaviour
         if(sceneName == "ProBuilderTest" || sceneName == "Level2")
         {
             HighScore.sceneName = sceneName;
+            HighScore.resetscene = sceneName;
+
+            HighScore2.sceneName = sceneName;
+            HighScore2.resetscene = sceneName;
         }
     }
 }

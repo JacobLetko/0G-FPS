@@ -17844,16 +17844,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 20
       objectReference: {fileID: 0}
-    - target: {fileID: 114125505353394238, guid: af53f6653838b1e4392dbb31188b7a04,
-        type: 2}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1140855714}
-    - target: {fileID: 114125505353394238, guid: af53f6653838b1e4392dbb31188b7a04,
-        type: 2}
-      propertyPath: bulletPool
-      value: 
-      objectReference: {fileID: 347872150}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: af53f6653838b1e4392dbb31188b7a04, type: 2}
   m_IsPrefabParent: 0

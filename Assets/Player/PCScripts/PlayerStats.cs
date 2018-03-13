@@ -37,7 +37,8 @@ public class PlayerStats : MonoBehaviour, IDamagable
             Collider col = GetComponent<Collider>();
             col.enabled = false;
 
-
+            Rigidbody rb = GetComponent<Rigidbody>();
+            rb.velocity = new Vector3(0, 0, 0);
 
             audioSource.pitch = 0.2f;
             audioSource.PlayOneShot(deathSound, 1f);

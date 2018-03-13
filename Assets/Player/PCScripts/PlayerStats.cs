@@ -31,8 +31,13 @@ public class PlayerStats : MonoBehaviour, IDamagable
             PlayerCam rig = GetComponent<PlayerCam>();
             rig.enabled = false;
 
+            GunManager gun = GetComponent<GunManager>();
+            gun.enabled = false;
+
             Collider col = GetComponent<Collider>();
             col.enabled = false;
+
+
 
             audioSource.pitch = 0.2f;
             audioSource.PlayOneShot(deathSound, 1f);

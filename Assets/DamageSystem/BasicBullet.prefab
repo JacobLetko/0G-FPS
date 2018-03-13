@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4777898240732522}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ammo_rocketModern
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 54564392854017390}
   - component: {fileID: 96423281891152250}
   - component: {fileID: 82938064853046586}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BasicBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 4378192486160436}
   - component: {fileID: 33721562968064134}
   - component: {fileID: 23249404632861604}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mesh1_Group1_Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -240,7 +240,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:

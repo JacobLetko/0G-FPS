@@ -11,9 +11,11 @@ public class AmmoPickup : MonoBehaviour {
     public GameObject audioPlayer;
 
 
-    private void OnCollisionEnter(Collision collision)
+    
+
+    private void OnTriggerEnter(Collider other)
     {
-        GunManager player = collision.gameObject.GetComponent<GunManager>();
+        GunManager player = other.gameObject.GetComponent<GunManager>();
         if (player)
         {
             player.bullet[ammoType].ammo += ammoAmt;

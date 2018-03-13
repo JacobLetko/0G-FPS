@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour, IDamagable
 {
+    public GameObject explosionParts;
+    public GameObject fighterSkin;
+    public GameObject deathParticles;
     public AudioSource audioSource;
     public AudioClip damaged;
+    public AudioClip deathSound;
     public float hitPoints = 100;
+    bool playedDeath = false;
     //public float shieldPoints = 100;
     float currentHP;
 
@@ -20,7 +25,28 @@ public class PlayerStats : MonoBehaviour, IDamagable
         hitPoints -= amt;
         hitPoints = Mathf.Clamp(hitPoints, 0, 100);
         
+        if(hitPoints <= 0 && !playedDeath)
+        {
+            fighterSkin.SetActive(false);
+            PlayerCam rig = GetComponent<PlayerCam>();
+            rig.enabled = false;
 
+            GunManager gun = GetComponent<GunManager>();
+            gun.enabled = false;
+
+            Collider col = GetComponent<Collider>();
+            col.enabled = false;
+
+
+
+            audioSource.pitch = 0.2f;
+            audioSource.PlayOneShot(deathSound, 1f);
+            deathParticles.SetActive(true);
+            deathParticles.GetComponent<ParticleSystem>().Play();
+            explosionParts.SetActive(true);
+            playedDeath = true;
+            
+        }
     }
 
     public float GetHealth()
@@ -29,8 +55,18 @@ public class PlayerStats : MonoBehaviour, IDamagable
     }
 
 
+    private void Awake()
+    {
+        explosionParts.SetActive(false);
+    }
+
+
     void Start()
     {
+
+        
+        
+
         currentHP = hitPoints;
         AudioSource[] array = GetComponents<AudioSource>();
         if(array.Length > 1)
@@ -38,6 +74,7 @@ public class PlayerStats : MonoBehaviour, IDamagable
             audioSource = array[1];
         }
     }
+
 
     void Update()
     {
@@ -58,6 +95,30 @@ public class PlayerStats : MonoBehaviour, IDamagable
         {
             currentHP = hitPoints;
         }
+
+
+
+        //if (playedDeath == false)
+        //{
+           
+        //    if (currentHP <= 0)
+        //    {
+        //        fighterSkin.SetActive(false);
+        //        Rigidbody rig = GetComponent<Rigidbody>();
+        //        rig.drag = 99999;
+
+        //        Collider col = GetComponent<Collider>();
+        //        col.enabled = false;
+
+        //        audioSource.pitch = 0.7f;
+        //        audioSource.PlayOneShot(deathSound, 0.5f);
+        //        explosionParts.SetActive(true);
+        //        playedDeath = true;
+        //    }
+            
+        //}
+
+
     }
 
 

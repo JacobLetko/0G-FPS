@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4602097186854632}
   - component: {fileID: 33532949454523108}
   - component: {fileID: 23647416452981502}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Mesh1_Group1_Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4892589695660110}
   - component: {fileID: 82354591209385796}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SoundPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,7 +52,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4093333918880860}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ammo_rocketModern
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 136484371313342192}
   - component: {fileID: 54586586153866682}
   - component: {fileID: 108049867768859522}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: AmmoPickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -258,7 +258,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -355,7 +355,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1554637807786824}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2

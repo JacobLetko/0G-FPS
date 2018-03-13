@@ -10,9 +10,12 @@ public class HealthPickup : MonoBehaviour {
     public GameObject audioPlayer;
 
 
-    private void OnCollisionEnter(Collision collision)
+    
+
+    private void OnTriggerEnter(Collider other)
     {
-        PlayerStats player = collision.gameObject.GetComponent<PlayerStats>();
+        Debug.Log(other.gameObject.name);
+        PlayerStats player = other.gameObject.GetComponent<PlayerStats>();
         if (player)
         {
             player.Damage(-healAmt);

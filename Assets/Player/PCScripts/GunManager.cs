@@ -415,7 +415,7 @@ public class GunManager : MonoBehaviour
                             damagable.Damage(bullet[weaponIndex].damage * (1.0f - (dist / AOE)));
                         }
 
-                        other.GetComponent<Rigidbody>().AddExplosionForce(bullet[weaponIndex].damage * 2, pos1, AOE);
+                        other.GetComponent<Rigidbody>().AddExplosionForce(bullet[weaponIndex].damage * 1000, pos1, AOE);
                     }
                 }
             }

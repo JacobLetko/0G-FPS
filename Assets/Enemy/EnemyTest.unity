@@ -5010,6 +5010,7 @@ MonoBehaviour:
   gunLight: {fileID: 0}
   lineRenderer: {fileID: 0}
   damageEffects: []
+  gunPoints: []
 --- !u!23 &421998988
 MeshRenderer:
   m_ObjectHideFlags: 0

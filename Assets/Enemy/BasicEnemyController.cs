@@ -50,6 +50,7 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
     public GameObject gunLight;
     public LineRenderer lineRenderer;
     public GameObject[] damageEffects;
+    public Transform[] gunPoints;
 
     private float health;
     private bool alive = true;
@@ -334,12 +335,18 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
                 sparks.SetActive(true);
             }
 
-            lineRenderer.SetPosition(0, transform.position);
+            Vector3 gunPos = transform.position;
+            if(gunPoints.Length > 0)
+            {
+                gunPos = gunPoints[Random.Range(0, gunPoints.Length)].position;
+            }
+            lineRenderer.SetPosition(0, gunPos);
             lineRenderer.enabled = true;
             laserRunTime = 0;
             {
                 laserLight.transform.position = hit.point - (transform.forward * 0.5f);
                 laserLight.SetActive(true);
+                gunLight.transform.position = gunPos;
                 gunLight.SetActive(true);
                 lineRenderer.SetPosition(1, hit.point);
                 IDamagable dmg = hit.transform.GetComponent<IDamagable>();

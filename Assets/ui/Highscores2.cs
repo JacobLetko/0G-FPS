@@ -5,7 +5,7 @@ using UnityEngine;
 using System.Collections;
 
 [System.Serializable]
-public static class HighScore
+public static class HighScore2
 {
     public static int score;
     static public bool show;
@@ -13,27 +13,22 @@ public static class HighScore
     public static string resetscene;
     public static int[] scores = new int[10];
     public static string[] names = new string[10];
-    
+
     public static string playerName;
 
     public static void befSort()
     {
-
         return;
-
-        sceneName = "ProBuilderTest";
-
+        sceneName = "Level2";
         sort();
         score = 0;
         playerName = "";
         sceneName = "";
-
     }
 
     public static void sort()
     {
         return;
-
         //Loop through the capacity, (This is what data we already have)
 
         //Loop through the remaining and add new data
@@ -82,14 +77,13 @@ public static class HighScore
 
         for (int i = 0; i < 10; i++)
         {
-            Debug.Log(sceneName+":"+names[i] + scores[i]);
+            Debug.Log(sceneName + ":" + names[i] + scores[i]);
         }
 
         save();
     }
     public static void save()
     {
-        return;
         BinaryFormatter bf = new BinaryFormatter();
         //scores
         FileStream file = File.Create(Application.persistentDataPath + "/" + sceneName + "Scores.gd");
@@ -107,12 +101,11 @@ public static class HighScore
         }
     }
     public static void load()
-{
-        return;
+    {
         BinaryFormatter bf = new BinaryFormatter();
         //scores
         if (File.Exists(Application.persistentDataPath + "/" + sceneName + "Scores.gd"))
-        {    
+        {
             FileStream file = File.Open(Application.persistentDataPath + "/" + sceneName + "Scores.gd", FileMode.Open);
             HighScore.scores = (int[])bf.Deserialize(file);
             file.Close();
@@ -126,7 +119,7 @@ public static class HighScore
 
         for (int i = 0; i < 10; i++)
         {
-            Debug.Log("ONLOAD_"+ sceneName+":"+names[i] + scores[i]);
+            Debug.Log("ONLOAD_" + sceneName + ":" + names[i] + scores[i]);
         }
     }
     public static void clear()

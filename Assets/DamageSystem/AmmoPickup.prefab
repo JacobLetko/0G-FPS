@@ -70,7 +70,6 @@ GameObject:
   - component: {fileID: 114380136121213962}
   - component: {fileID: 114805011247699864}
   - component: {fileID: 136484371313342192}
-  - component: {fileID: 54586586153866682}
   - component: {fileID: 108049867768859522}
   m_Layer: 2
   m_Name: AmmoPickup
@@ -176,21 +175,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1326265711168850}
   m_Mesh: {fileID: 4300000, guid: 40d5093c2a9d61046b66648017192aa9, type: 3}
---- !u!54 &54586586153866682
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1554637807786824}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!82 &82354591209385796
 AudioSource:
   m_ObjectHideFlags: 1

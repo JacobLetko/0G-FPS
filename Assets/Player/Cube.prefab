@@ -4482,6 +4482,7 @@ MonoBehaviour:
     effectName: ElectricalSparksEffect
     material: {fileID: 2100000, guid: 31cf560cbedc5e34bbb821a94055e6b2, type: 2}
     damage: 20
+    explosionForceModifier: 1000
     fireRate: 0.1
     ammo: 100
     infinite: 1
@@ -4500,6 +4501,7 @@ MonoBehaviour:
     effectName: Splode
     material: {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
     damage: 115
+    explosionForceModifier: 10
     fireRate: 1
     ammo: 10
     infinite: 0

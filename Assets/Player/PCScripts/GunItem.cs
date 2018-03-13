@@ -40,6 +40,8 @@ public class GunItem
 
     public float damage;
 
+    public float explosionForceModifier = 1000;
+
     public float fireRate = 0.25f;
 
     [Range(1, 100000)]

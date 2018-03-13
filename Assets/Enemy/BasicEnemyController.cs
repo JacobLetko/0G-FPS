@@ -49,7 +49,9 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
     public GameObject laserLight;
     public GameObject gunLight;
     public LineRenderer lineRenderer;
+    public ParticleSystem[] thrustParticles;
     public GameObject[] damageEffects;
+    public Transform[] gunPoints;
 
     private float health;
     private bool alive = true;
@@ -262,6 +264,13 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
 
     public void GoToTarg(float force)
     {
+        if(thrustParticles.Length > 0)
+        {
+            foreach(ParticleSystem p in thrustParticles)
+            {
+                p.Play();
+            }
+        }
         body.AddForce(-body.velocity * body.mass, ForceMode.Impulse);
         Vector3 trgDir = trgPos - transform.position;
         body.AddForce(trgDir.normalized * force);
@@ -304,6 +313,14 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
         audioSource.PlayOneShot(explodeSound);
         alive = false;
 
+        if (thrustParticles.Length > 0)
+        {
+            foreach (ParticleSystem p in thrustParticles)
+            {
+                p.Stop();
+            }
+        }
+
         HighScore.addPoints(killScore);
         
         explodeParts.SetActive(true);
@@ -334,12 +351,18 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
                 sparks.SetActive(true);
             }
 
-            lineRenderer.SetPosition(0, transform.position);
+            Vector3 gunPos = transform.position;
+            if(gunPoints.Length > 0)
+            {
+                gunPos = gunPoints[Random.Range(0, gunPoints.Length)].position;
+            }
+            lineRenderer.SetPosition(0, gunPos);
             lineRenderer.enabled = true;
             laserRunTime = 0;
             {
                 laserLight.transform.position = hit.point - (transform.forward * 0.5f);
                 laserLight.SetActive(true);
+                gunLight.transform.position = gunPos;
                 gunLight.SetActive(true);
                 lineRenderer.SetPosition(1, hit.point);
                 IDamagable dmg = hit.transform.GetComponent<IDamagable>();

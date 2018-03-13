@@ -122,9 +122,9 @@ public class PlayerCam : MonoBehaviour
         metersPerSec = myRig.velocity.magnitude;
 
 
-        myRig.AddRelativeTorque(Vector3.up * Input.GetAxis("Mouse X") * mouseSensX);//do not multiply by time.deltatime as mouse input is frame independant
+        myRig.AddRelativeTorque(Vector3.up * Input.GetAxis("Mouse X") * Time.timeScale * mouseSensX);//do not multiply by time.deltatime as mouse input is frame independant
 
-        myRig.AddRelativeTorque(Vector3.left * Input.GetAxis("Mouse Y") * mouseSensY);
+        myRig.AddRelativeTorque(Vector3.left * Input.GetAxis("Mouse Y") * Time.timeScale * mouseSensY);
 
 
         if (Input.GetKey("x"))

@@ -26,9 +26,11 @@ public class LoadSceneOnClick : MonoBehaviour
         {
             HighScore.sceneName = sceneName;
             HighScore.resetscene = sceneName;
+        }
 
-            HighScore2.sceneName = sceneName;
-            HighScore2.resetscene = sceneName;
+        if(sceneName == "MainMenu")
+        {
+            HighScore.sceneName = "";
         }
     }
 }

@@ -20,7 +20,9 @@ public class HighScoreTable
 
 }
 
-
+/// <summary>
+/// Jons stuff works dont delete any of it unless you know what you doing
+/// </summary>
 public class HighScoreBehavior : MonoBehaviour {
 
     public Text level1scores;
@@ -39,7 +41,6 @@ public class HighScoreBehavior : MonoBehaviour {
 
     public void table()
     {
-
         if (!CurrentPlayerScoreAdded)
         {
             if (HighScore.sceneName == "Level2")
@@ -52,44 +53,10 @@ public class HighScoreBehavior : MonoBehaviour {
                 AppendNewScore(HighScore.playerName, HighScore.score, probuildertestTable);
                 SaveTable(probuildertestTable, HighScore.sceneName);
             }
-
-
         }
 
         level1scores.text = GetDataIntoText(probuildertestTable);
         level2scores.text = GetDataIntoText(level2Tbl);
-
-
-
-        //HighScore.sceneName = "ProBuilderTest";
-        //HighScore.befSort();
-        //for (int i = 0; i < HighScore.names.Length; i++)
-        //    {
-        //    if (i == 0)
-        //    {
-        //        level1scores.text = (i + 1) + ".    " + HighScore.names[i] + "   " + HighScore.scores[i] + "\n";
-        //    }
-        //    else
-        //    {
-        //        level1scores.text += (i + 1) + ".    " + HighScore.names[i] + "   " + HighScore.scores[i] + "\n";
-        //    }
-        //    }
-        //HighScore.save();
-
-        //HighScore2.sceneName = "Level2";
-        //HighScore2.befSort();
-        //for (int i = 0; i < HighScore2.names.Length; i++)
-        //{
-        //    if (i == 0)
-        //    {
-        //        level2scores.text = (i + 1) + ".    " + HighScore2.names[i] + "   " + HighScore2.scores[i] + "\n";
-        //    }
-        //    else
-        //    {
-        //        level2scores.text += (i + 1) + ".    " + HighScore2.names[i] + "   " + HighScore2.scores[i] + "\n";
-        //    }
-        //}
-        //HighScore2.save();
     }
 
     public void addName(Text name)
@@ -99,20 +66,15 @@ public class HighScoreBehavior : MonoBehaviour {
         {
             HighScore.playerName = "Player";
         }
-        HighScore.save();
-    }
-
-    public void loadScores()
-    {
-        HighScore.befSort();
     }
     public void ResetScores()
     {
-        HighScore.clear();
-
         //Jons Stuff
         level2Tbl.scoreTable = new List<HighScoreObject>();
         probuildertestTable.scoreTable = new List<HighScoreObject>();
+
+        SaveTable(level2Tbl, "Level2");
+        SaveTable(probuildertestTable, "ProBuilderTest");
     }
 
     public void Awake()
@@ -141,15 +103,15 @@ public class HighScoreBehavior : MonoBehaviour {
     string GetDataIntoText(HighScoreTable hst)
     {
         string rtn = "";
-        for (int i = 0; i < hst.scoreTable.Count; i++) {
-            rtn += (i + 1) + hst.scoreTable[i].name + "   " + hst.scoreTable[i].score + "\n";
-            
-                }
+        for (int i = 0; i < hst.scoreTable.Count; i++)
+        {
+            rtn += (i + 1)+".   "+  hst.scoreTable[i].name + "   " + hst.scoreTable[i].score + "\n";
+
+        }
 
         return rtn;
     }
 
-    
 
     /// <summary>
     /// Appends the score
@@ -168,7 +130,6 @@ public class HighScoreBehavior : MonoBehaviour {
     }
 
 
-
     /// <summary>
     /// Loads a table from the given filename
     /// </summary>
@@ -182,18 +143,12 @@ public class HighScoreBehavior : MonoBehaviour {
         {
             string tmpstr = PlayerPrefs.GetString(filename);
             rtn = JsonUtility.FromJson<HighScoreTable>(tmpstr);
-
-
         }
         else
         {
             rtn.scoreTable = new List<HighScoreObject>();
         }
-
-
-
-        return rtn;
-        
+        return rtn; 
     }
 
     /// <summary>

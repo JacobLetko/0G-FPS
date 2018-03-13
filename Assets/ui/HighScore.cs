@@ -79,6 +79,7 @@ public static class HighScore
         }
         scores = tempS;
         names = tempN;
+
         save();
     }
     public static void save()
@@ -117,7 +118,7 @@ public static class HighScore
         for (int i = 0; i < 10; i++)
         {
             scores[i] = 0;
-            names[i] = "player";
+            names[i] = "";
         }
         save();
 
@@ -125,7 +126,7 @@ public static class HighScore
         for (int i = 0; i < 10; i++)
         {
             scores[i] = 0;
-            names[i] = "player";
+            names[i] = "";
         }
         save();
 

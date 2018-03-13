@@ -258,6 +258,7 @@ public class GunManager : MonoBehaviour
         Debug.Log(bulletObj.GetComponent<Bullet>().effectName);
         bulletObj.GetComponent<Bullet>().sfxSource.mute = true;
         bulletObj.GetComponent<Bullet>().sfxSource.clip = bullet[weaponIndex].contactSound;
+        bulletObj.GetComponent<Bullet>().explosionForce = bullet[weaponIndex].explosionForceModifier;
 
 
     }
@@ -415,7 +416,8 @@ public class GunManager : MonoBehaviour
                             damagable.Damage(bullet[weaponIndex].damage * (1.0f - (dist / AOE)));
                         }
 
-                        other.GetComponent<Rigidbody>().AddExplosionForce(bullet[weaponIndex].damage * 1000, pos1, AOE);
+                        other.GetComponent<Rigidbody>().AddExplosionForce( (1 + bullet[weaponIndex].damage) * bullet[weaponIndex].explosionForceModifier, pos1, AOE);
+                        other.GetComponent<Rigidbody>().AddTorque(pos1 * (1 + bullet[weaponIndex].damage * bullet[weaponIndex].explosionForceModifier), ForceMode.Force);
                     }
                 }
             }

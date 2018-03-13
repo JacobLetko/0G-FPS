@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour {
     public float damage = 10f;
     public float speed = 10f;
     public float lifetime = 2f;
+    public float explosionForce = 1000;
     public float AOE = 0;
     public bool hasTrail = false;
     public AudioSource sfxSource;
@@ -193,7 +194,7 @@ public class Bullet : MonoBehaviour {
                             damagable.Damage(damage * (1.0f - (dist / AOE)));
                         }
 
-                        other.GetComponent<Rigidbody>().AddExplosionForce(damage * 2, transform.position, AOE);
+                        other.GetComponent<Rigidbody>().AddExplosionForce(1 + damage * explosionForce, transform.position, AOE);
                     }
                 }
             }

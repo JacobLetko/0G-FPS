@@ -161,7 +161,7 @@ public class GunManager : MonoBehaviour
 
                         SwitchBullet(bul);
 
-                        bul.transform.position = transform.position;
+                        bul.transform.position = transform.position + (transform.forward * 1.5f);
                         bul.transform.rotation = transform.rotation;
                         bul.transform.Rotate(new Vector3(Random.Range(bullet[weaponIndex].accuracyModifier, -bullet[weaponIndex].accuracyModifier),
                                                          Random.Range(bullet[weaponIndex].accuracyModifier, -bullet[weaponIndex].accuracyModifier),

@@ -49,6 +49,7 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
     public GameObject laserLight;
     public GameObject gunLight;
     public LineRenderer lineRenderer;
+    public ParticleSystem[] thrustParticles;
     public GameObject[] damageEffects;
     public Transform[] gunPoints;
 
@@ -263,6 +264,13 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
 
     public void GoToTarg(float force)
     {
+        if(thrustParticles.Length > 0)
+        {
+            foreach(ParticleSystem p in thrustParticles)
+            {
+                p.Play();
+            }
+        }
         body.AddForce(-body.velocity * body.mass, ForceMode.Impulse);
         Vector3 trgDir = trgPos - transform.position;
         body.AddForce(trgDir.normalized * force);
@@ -304,6 +312,14 @@ public class BasicEnemyController : MonoBehaviour, IDamagable {
         audioSource.pitch = 1.0f;
         audioSource.PlayOneShot(explodeSound);
         alive = false;
+
+        if (thrustParticles.Length > 0)
+        {
+            foreach (ParticleSystem p in thrustParticles)
+            {
+                p.Stop();
+            }
+        }
 
         HighScore.addPoints(killScore);
         

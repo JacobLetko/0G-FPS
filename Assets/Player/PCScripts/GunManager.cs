@@ -117,6 +117,8 @@ public class GunManager : MonoBehaviour
 
 
 
+
+
         if (Input.GetAxis("Fire1") > 0)
         {
             fire = true;

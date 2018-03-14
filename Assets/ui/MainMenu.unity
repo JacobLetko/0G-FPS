@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -5946,7 +5946,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 76.46652, y: 250.1388}
-  m_SizeDelta: {x: 428.1, y: 105.56}
+  m_SizeDelta: {x: 831.32, y: 105.56}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1533936790
 MonoBehaviour:
@@ -5980,7 +5980,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Main Menu
+  m_Text: Six Degrees of Decent
 --- !u!222 &1533936791
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6930,7 +6930,7 @@ MonoBehaviour:
 
     Terry
 
-    Kolby
+    Kobey
 
     Jon'
 --- !u!222 &2076572509
